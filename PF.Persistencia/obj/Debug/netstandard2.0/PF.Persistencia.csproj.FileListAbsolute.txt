@@ -1,0 +1,12 @@
+/home/carlos/Projects/ProyectoFinal/PF.Persistencia/bin/Debug/netstandard2.0/PF.Persistencia.deps.json
+/home/carlos/Projects/ProyectoFinal/PF.Persistencia/bin/Debug/netstandard2.0/PF.Persistencia.dll
+/home/carlos/Projects/ProyectoFinal/PF.Persistencia/bin/Debug/netstandard2.0/PF.Persistencia.pdb
+/home/carlos/Projects/ProyectoFinal/PF.Persistencia/bin/Debug/netstandard2.0/PF.Dominio.dll
+/home/carlos/Projects/ProyectoFinal/PF.Persistencia/bin/Debug/netstandard2.0/PF.Dominio.pdb
+/home/carlos/Projects/ProyectoFinal/PF.Persistencia/obj/Debug/netstandard2.0/PF.Persistencia.csprojAssemblyReference.cache
+/home/carlos/Projects/ProyectoFinal/PF.Persistencia/obj/Debug/netstandard2.0/PF.Persistencia.csproj.CoreCompileInputs.cache
+/home/carlos/Projects/ProyectoFinal/PF.Persistencia/obj/Debug/netstandard2.0/PF.Persistencia.AssemblyInfoInputs.cache
+/home/carlos/Projects/ProyectoFinal/PF.Persistencia/obj/Debug/netstandard2.0/PF.Persistencia.AssemblyInfo.cs
+/home/carlos/Projects/ProyectoFinal/PF.Persistencia/obj/Debug/netstandard2.0/PF.Persistencia.csproj.CopyComplete
+/home/carlos/Projects/ProyectoFinal/PF.Persistencia/obj/Debug/netstandard2.0/PF.Persistencia.dll
+/home/carlos/Projects/ProyectoFinal/PF.Persistencia/obj/Debug/netstandard2.0/PF.Persistencia.pdb

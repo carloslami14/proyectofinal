@@ -1,0 +1,9 @@
+/home/carlos/Projects/ProyectoFinal/PF.Dominio/bin/Debug/netstandard2.0/PF.Dominio.deps.json
+/home/carlos/Projects/ProyectoFinal/PF.Dominio/bin/Debug/netstandard2.0/PF.Dominio.dll
+/home/carlos/Projects/ProyectoFinal/PF.Dominio/bin/Debug/netstandard2.0/PF.Dominio.pdb
+/home/carlos/Projects/ProyectoFinal/PF.Dominio/obj/Debug/netstandard2.0/PF.Dominio.csprojAssemblyReference.cache
+/home/carlos/Projects/ProyectoFinal/PF.Dominio/obj/Debug/netstandard2.0/PF.Dominio.csproj.CoreCompileInputs.cache
+/home/carlos/Projects/ProyectoFinal/PF.Dominio/obj/Debug/netstandard2.0/PF.Dominio.AssemblyInfoInputs.cache
+/home/carlos/Projects/ProyectoFinal/PF.Dominio/obj/Debug/netstandard2.0/PF.Dominio.AssemblyInfo.cs
+/home/carlos/Projects/ProyectoFinal/PF.Dominio/obj/Debug/netstandard2.0/PF.Dominio.dll
+/home/carlos/Projects/ProyectoFinal/PF.Dominio/obj/Debug/netstandard2.0/PF.Dominio.pdb
