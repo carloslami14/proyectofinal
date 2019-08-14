@@ -1,28 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "/home/carlos/Projects/ProyectoFinal/PF.Dominio/PF.Dominio.csproj": {}
+    "C:\\Users\\Daniel\\source\\repos\\proyectofinal\\PF.Dominio\\PF.Dominio.csproj": {}
   },
   "projects": {
-    "/home/carlos/Projects/ProyectoFinal/PF.Dominio/PF.Dominio.csproj": {
+    "C:\\Users\\Daniel\\source\\repos\\proyectofinal\\PF.Dominio\\PF.Dominio.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/carlos/Projects/ProyectoFinal/PF.Dominio/PF.Dominio.csproj",
+        "projectUniqueName": "C:\\Users\\Daniel\\source\\repos\\proyectofinal\\PF.Dominio\\PF.Dominio.csproj",
         "projectName": "PF.Dominio",
-        "projectPath": "/home/carlos/Projects/ProyectoFinal/PF.Dominio/PF.Dominio.csproj",
-        "packagesPath": "/home/carlos/.nuget/packages/",
-        "outputPath": "/home/carlos/Projects/ProyectoFinal/PF.Dominio/obj/",
+        "projectPath": "C:\\Users\\Daniel\\source\\repos\\proyectofinal\\PF.Dominio\\PF.Dominio.csproj",
+        "packagesPath": "C:\\Users\\Daniel\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Daniel\\source\\repos\\proyectofinal\\PF.Dominio\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "/usr/share/dotnet/sdk/NuGetFallbackFolder"
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "/home/carlos/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Daniel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
