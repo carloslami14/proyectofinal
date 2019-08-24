@@ -3085,35 +3085,37 @@
     ]
   },
   "packageFolders": {
-    "/home/carlos/.nuget/packages/": {},
-    "/usr/share/dotnet/sdk/NuGetFallbackFolder": {}
+    "C:\\Users\\Daniel\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/carlos/Projects/ProyectoFinal/PF.Persistencia/PF.Persistencia.csproj",
+      "projectUniqueName": "C:\\Users\\Daniel\\source\\repos\\proyectofinal\\PF.Persistencia\\PF.Persistencia.csproj",
       "projectName": "PF.Persistencia",
-      "projectPath": "/home/carlos/Projects/ProyectoFinal/PF.Persistencia/PF.Persistencia.csproj",
-      "packagesPath": "/home/carlos/.nuget/packages/",
-      "outputPath": "/home/carlos/Projects/ProyectoFinal/PF.Persistencia/obj/",
+      "projectPath": "C:\\Users\\Daniel\\source\\repos\\proyectofinal\\PF.Persistencia\\PF.Persistencia.csproj",
+      "packagesPath": "C:\\Users\\Daniel\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Daniel\\source\\repos\\proyectofinal\\PF.Persistencia\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "/usr/share/dotnet/sdk/NuGetFallbackFolder"
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "/home/carlos/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Daniel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netstandard2.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netstandard2.0": {
           "projectReferences": {
-            "/home/carlos/Projects/ProyectoFinal/PF.Dominio/PF.Dominio.csproj": {
-              "projectPath": "/home/carlos/Projects/ProyectoFinal/PF.Dominio/PF.Dominio.csproj"
+            "C:\\Users\\Daniel\\source\\repos\\proyectofinal\\PF.Dominio\\PF.Dominio.csproj": {
+              "projectPath": "C:\\Users\\Daniel\\source\\repos\\proyectofinal\\PF.Dominio\\PF.Dominio.csproj"
             }
           }
         }

@@ -524,7 +524,11 @@
         "runtime": {
           "lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll": {
             "assemblyVersion": "4.0.4.0",
+<<<<<<< HEAD
             "fileVersion": "4.0.0.0"
+=======
+            "fileVersion": "0.0.0.0"
+>>>>>>> e5b98765615f4f9bd1571a1dc5ed2564de82da1a
           }
         }
       },
