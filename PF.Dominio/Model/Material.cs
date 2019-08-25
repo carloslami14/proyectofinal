@@ -1,3 +1,5 @@
+using PF.Dominio.Enumerations;
+
 namespace PF.Dominio.Model
 {
     public class Material: Base
