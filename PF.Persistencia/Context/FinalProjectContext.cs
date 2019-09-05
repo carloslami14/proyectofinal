@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace PF.Persistencia.Context
 {
-    public class FinalProjectContext: DbContext
+    public class FinalProjectContext: DbContext, IFinalProjectContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

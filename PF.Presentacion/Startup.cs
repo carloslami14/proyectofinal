@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PF.Persistencia.Context;
 
 namespace PF.Presentacion
 {
@@ -28,7 +30,7 @@ namespace PF.Presentacion
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            
+            services.AddDbContext<FinalProjectContext>(option => option.UseMySQL(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
