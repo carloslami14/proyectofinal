@@ -7,7 +7,6 @@ namespace PF.Persistencia.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL(Setting.ConnectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
