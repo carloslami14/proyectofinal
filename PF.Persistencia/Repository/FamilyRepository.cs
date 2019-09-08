@@ -3,13 +3,14 @@ using System.Linq;
 using System.Linq.Expressions;
 using PF.Dominio.Interfaces.Model;
 using PF.Dominio.Model;
+using PF.Persistencia.Context;
 
 namespace PF.Persistencia.Repository
 {
     public class FamilyRepository : IFamilyRepository
     {
-        private readonly IFinalProjectContext _context;
-        public FamilyRepository(IFinalProjectContext context)
+        private readonly FinalProjectContext _context;
+        public FamilyRepository(FinalProjectContext context)
         {
             _context = context;
         }

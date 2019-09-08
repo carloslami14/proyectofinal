@@ -5,8 +5,19 @@ namespace PF.Persistencia.Context
 {
     public class FinalProjectContext: DbContext, IFinalProjectContext
     {
+        public FinalProjectContext()
+        {
+        }
+        public FinalProjectContext(DbContextOptions options)
+        : base(options)
+        {
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseMySQL("server=localhost;port=33060;database=FinalProject;Uid=root;Pwd=C@rl0sLam1!;");
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
