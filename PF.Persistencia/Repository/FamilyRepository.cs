@@ -3,34 +3,40 @@ using System.Linq;
 using System.Linq.Expressions;
 using PF.Dominio.Interfaces.Model;
 using PF.Dominio.Model;
+using PF.Persistencia.Context;
 
 namespace PF.Persistencia.Repository
 {
     public class FamilyRepository : IFamilyRepository
     {
-        private readonly IFinalProjectContext _context;
-        public FamilyRepository(IFinalProjectContext context)
+        private readonly FinalProjectContext _context;
+        public FamilyRepository(FinalProjectContext context)
         {
             _context = context;
         }
         public void Add(Family entity)
         {
+            entity.ModificationDate = DateTime.Today;
             _context.Families.Add(entity);
         }
 
         public void Delete(Family entity)
         {
-            _context.Families.Remove(entity);
+            entity.ModificationDate = DateTime.Today;
+            entity.State = Dominio.State.Removed;
+            _context.Update(entity);
+            Save();
         }
 
         public void Edit(Family entity)
         {
-            throw new NotImplementedException();
+            _context.Update(entity);
+            Save();
         }
-
-        public IQueryable<Family> Find(Expression<Func<Family, bool>> predicate)
+        
+        public Family GetById(int Id)
         {
-            throw new NotImplementedException();
+            return _context.Families.FirstOrDefault(fl => fl.FamilyId == Id);
         }
 
         public IQueryable<Family> GetAll()
@@ -40,7 +46,7 @@ namespace PF.Persistencia.Repository
 
         public void Save()
         {
-            throw new NotImplementedException();
+            _context.SaveChanges();
         }
     }
 }
