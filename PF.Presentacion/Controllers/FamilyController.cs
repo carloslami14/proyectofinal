@@ -16,9 +16,9 @@ namespace PF.Presentacion.Controllers
         }
 
         [HttpPost("[action]")]
-        public void Create()
+        public void Create(Family family)
         {
-            
+            _familyRepository.Add(family);
         }
 
         [HttpGet("[action]")]

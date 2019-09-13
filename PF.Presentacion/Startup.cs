@@ -36,7 +36,11 @@ namespace PF.Presentacion
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            services.AddDbContext<FinalProjectContext>(option => option.UseMySQL(Configuration.GetConnectionString("DefaultConnection")));
+            // MySql
+            //services.AddDbContext<FinalProjectContext>(option => option.UseMySQL(Configuration.GetConnectionString("MySqlConnection")));
+
+            // Sql Server
+            services.AddDbContext<FinalProjectContext>(option => option.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

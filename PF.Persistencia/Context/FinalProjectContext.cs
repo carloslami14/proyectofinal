@@ -16,7 +16,11 @@ namespace PF.Persistencia.Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySQL("server=localhost;port=33060;database=FinalProject;Uid=root;Pwd=C@rl0sLam1!;");
+                // MySql
+                //optionsBuilder.UseMySQL("server=localhost;port=33060;database=FinalProject;Uid=root;Pwd=C@rl0sLam1!;");
+                
+                // Sql Server
+                optionsBuilder.UseSqlServer("Server=127.0.0.1,1431;Database=PersonDB;User ID=SA; Password=C@rl0sLam1!;MultipleActiveResultSets=true");
             }
         }
 

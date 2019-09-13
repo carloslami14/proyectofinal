@@ -29,6 +29,7 @@ import { FamilyComponent } from './family/family/family.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
+      { path: 'family', component: FamilyComponent },
     ]),
     BrowserAnimationsModule
   ],

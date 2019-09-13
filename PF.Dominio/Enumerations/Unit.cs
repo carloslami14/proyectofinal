@@ -1,6 +1,6 @@
 namespace PF.Dominio.Enumerations
 {
-    public enum Unity
+    public enum Unit
     {
         Kilogramo,
         Litos,
