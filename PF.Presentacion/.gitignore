@@ -232,3 +232,10 @@ _Pvt_Extensions
 
 
 appsettings.json
+
+*.suo
+*.user
+_ReSharper.*
+bin
+obj
+packages
