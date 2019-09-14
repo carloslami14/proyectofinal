@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using PF.Dominio.Interfaces.Model;
 using PF.Persistencia.Context;
 using PF.Persistencia.Repository;
+using System;
 
 namespace PF.Presentacion
 {
@@ -17,6 +18,7 @@ namespace PF.Presentacion
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+          
         }
 
         public IConfiguration Configuration { get; }
@@ -26,8 +28,7 @@ namespace PF.Presentacion
         {
             // Dependency Injection
             services.AddTransient<IFamilyRepository, FamilyRepository>();
-
-
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             // In production, the Angular files will be served from this directory

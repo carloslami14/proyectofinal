@@ -1,5 +1,10 @@
 using PF.Dominio.Model;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Configuration;
+
+
+
 
 namespace PF.Persistencia.Context
 {
@@ -14,14 +19,21 @@ namespace PF.Persistencia.Context
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-                // MySql
-                //optionsBuilder.UseMySQL("server=localhost;port=33060;database=FinalProject;Uid=root;Pwd=C@rl0sLam1!;");
-                
-                // Sql Server
-                optionsBuilder.UseSqlServer("Server=127.0.0.1,1431;Database=PersonDB;User ID=SA; Password=C@rl0sLam1!;MultipleActiveResultSets=true");
-            }
+            //IConfigurationRoot configuration = new ConfigurationBuilder()
+            //   .SetBasePath()
+            //   .AddJsonFile("appsettings.json")
+            //   .Build();
+            //optionsBuilder.UseSqlServer(configuration.GetConnectionString("SqlServerConnection"));
+
+            //if (!optionsBuilder.IsConfigured)
+            //{
+            //    // MySql
+            //    //optionsBuilder.UseMySQL("server=localhost;port=33060;database=FinalProject;Uid=root;Pwd=C@rl0sLam1!;");
+
+            //    // Sql Server
+            //    optionsBuilder.UseSqlServer("Server=DESKTOP-6EN2SIQ\\SQLEXPRESS;Database=ProyectoFinal;Trusted_Connection=True;MultipleActiveResultSets=true;");
+
+            //}
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
