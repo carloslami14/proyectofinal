@@ -12,6 +12,9 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FamilyComponent } from './family/family/family.component';
 
+//Third party imports
+import { NgxLoadingModule } from "ngx-loading";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +34,8 @@ import { FamilyComponent } from './family/family/family.component';
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'family', component: FamilyComponent },
     ]),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgxLoadingModule.forRoot({})
   ],
   providers: [],
   bootstrap: [AppComponent]

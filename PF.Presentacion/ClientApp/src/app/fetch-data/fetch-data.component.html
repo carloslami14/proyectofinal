@@ -1,20 +1,36 @@
-<h1>Families</h1>
+<div>
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px'}"></ngx-loading>
 
-<p>This component demonstrates fetching data from the server.</p>
+  <div class="card">
+      <div class="card-header">
+      <h3 class="card-title">Familias</h3>
+    </div>
+    <div class="card-body">
+        <!-- <button class="btn btn-sm btn-primary">Agregar</button> -->
 
-<p *ngIf="!families"><em>Loading...</em></p>
+        <!-- TODO -->
+    </div>
+  </div>
 
-<table class='table table-striped' *ngIf="families">
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let family of families">
-      <td>{{ family.familyId }}</td>
-      <td>{{ family.name }}</td>
-    </tr>
-  </tbody>
-</table>
+  <div class="card">
+    <div class="card-header">
+      <a [routerLink]="['/routePath']" routerLinkActive="router-link-active" class="btn btn-sm btn-primary float-right">+</a>
+    </div>
+    <div class="card-body">
+        <table class='table table-striped' *ngIf="families">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let family of families">
+                <td>{{ family.familyId }}</td>
+                <td>{{ family.name }}</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+  </div>
+</div>
