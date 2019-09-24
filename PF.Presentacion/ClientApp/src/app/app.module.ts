@@ -17,29 +17,30 @@ import { FamiliesComponent } from './families/families.component';
 import { FamiliesFormComponent } from './families/families-form/families-form.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavMenuComponent,
-    HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
-    FamiliesComponent,
-    FamiliesFormComponent
-  ],
-  imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'families', component: FamiliesComponent },
-      { path: 'families-add', component: FamiliesFormComponent },
-    ]),
-    BrowserAnimationsModule,
-    NgxLoadingModule.forRoot({})
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        NavMenuComponent,
+        HomeComponent,
+        CounterComponent,
+        FetchDataComponent,
+        FamiliesComponent,
+        FamiliesFormComponent
+    ],
+    imports: [
+        BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        RouterModule.forRoot([
+            { path: '', component: HomeComponent, pathMatch: 'full' },
+            { path: 'families', component: FamiliesComponent },
+            { path: 'families-add', component: FamiliesFormComponent },
+            { path: 'families-edit/:id', component: FamiliesFormComponent },
+        ]),
+        BrowserAnimationsModule,
+        NgxLoadingModule.forRoot({})
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

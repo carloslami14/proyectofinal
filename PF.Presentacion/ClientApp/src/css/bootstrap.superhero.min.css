@@ -9923,3 +9923,7 @@ label,
 .modal-footer .close:focus {
 	opacity: 1;
 }
+
+.btn-space {
+  margin-right: 5px;
+}

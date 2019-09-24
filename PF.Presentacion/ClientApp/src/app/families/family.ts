@@ -1,4 +1,4 @@
 export interface IFamily {
-    familyId: number;
+    id: number;
     name: string;
   }

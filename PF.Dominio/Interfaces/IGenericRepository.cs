@@ -8,8 +8,8 @@ namespace PF.Dominio.Interfaces
 {
     public interface IGenericRepository<T> where T : class
     {
-        Task<IEnumerable<T>> GetAll();
-        Task<T> GetById(int Id);
+        IEnumerable<T> GetAll();
+        T GetById(int Id);
         void Add(T entity);
         void Delete(T entity);
         void Edit(T entity);

@@ -4,10 +4,10 @@ using System.Linq.Expressions;
 using PF.Dominio.Interfaces.Model;
 using PF.Dominio.Model;
 using PF.Persistencia.Context;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using PF.Dominio.Interfaces;
 using System.Collections.Generic;
+using PF.Dominio;
 
 namespace PF.Persistencia.Repository
 {
@@ -21,31 +21,34 @@ namespace PF.Persistencia.Repository
         public void Add(Family entity)
         {
             entity.ModificationDate = DateTime.Today;
+            entity.State = State.Enabled;
             _context.Families.Add(entity);
         }
 
         public void Delete(Family entity)
         {
             entity.ModificationDate = DateTime.Today;
-            entity.State = Dominio.State.Removed;
+            entity.State = State.Removed;
             _context.Update(entity);
             Save();
         }
 
         public void Edit(Family entity)
         {
+            entity.ModificationDate = DateTime.Today;
+            entity.State = State.Enabled;
             _context.Update(entity);
             Save();
         }
         
-        public async Task<Family> GetById(int Id)
+        public Family GetById(int Id)
         {
-            return await _context.Families.FirstOrDefaultAsync(fl => fl.FamilyId == Id);
+            return _context.Families.FirstOrDefault(fl => fl.Id == Id && fl.State == State.Enabled);
         }
 
-        public async Task<IEnumerable<Family>> GetAll()
+        public IEnumerable<Family> GetAll()
         {
-            return await _context.Families.ToListAsync();
+            return _context.Families.Where(families => families.State == State.Enabled);
         }
 
         public void Save()
