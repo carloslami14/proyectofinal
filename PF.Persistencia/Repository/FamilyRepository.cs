@@ -4,6 +4,10 @@ using System.Linq.Expressions;
 using PF.Dominio.Interfaces.Model;
 using PF.Dominio.Model;
 using PF.Persistencia.Context;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using PF.Dominio.Interfaces;
+using System.Collections.Generic;
 
 namespace PF.Persistencia.Repository
 {
@@ -34,14 +38,14 @@ namespace PF.Persistencia.Repository
             Save();
         }
         
-        public Family GetById(int Id)
+        public async Task<Family> GetById(int Id)
         {
-            return _context.Families.FirstOrDefault(fl => fl.FamilyId == Id);
+            return await _context.Families.FirstOrDefaultAsync(fl => fl.FamilyId == Id);
         }
 
-        public IQueryable<Family> GetAll()
+        public async Task<IEnumerable<Family>> GetAll()
         {
-            return _context.Families;
+            return await _context.Families.ToListAsync();
         }
 
         public void Save()

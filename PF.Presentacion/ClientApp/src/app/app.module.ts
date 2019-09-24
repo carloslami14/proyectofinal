@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -10,10 +10,11 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FamilyComponent } from './family/family/family.component';
 
 //Third party imports
 import { NgxLoadingModule } from "ngx-loading";
+import { FamiliesComponent } from './families/families.component';
+import { FamiliesFormComponent } from './families/families-form/families-form.component';
 
 @NgModule({
   declarations: [
@@ -22,17 +23,18 @@ import { NgxLoadingModule } from "ngx-loading";
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    FamilyComponent
+    FamiliesComponent,
+    FamiliesFormComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'family', component: FamilyComponent },
+      { path: 'families', component: FamiliesComponent },
+      { path: 'families-add', component: FamiliesFormComponent },
     ]),
     BrowserAnimationsModule,
     NgxLoadingModule.forRoot({})

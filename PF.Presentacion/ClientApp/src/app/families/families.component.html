@@ -1,0 +1,35 @@
+<div>
+    <div class="card">
+        <div class="card-header">
+        <h3 class="card-title">Familias</h3>
+      </div>
+      <div class="card-body">
+          <!-- <button class="btn btn-sm btn-primary">Agregar</button> -->
+  
+          <!-- TODO -->
+      </div>
+    </div>
+  
+    <div class="card">
+      <div class="card-header">
+        <a [routerLink]="['/families-add']" routerLinkActive="router-link-active" class="btn btn-sm btn-primary float-right">Agregar</a>
+      </div>
+      <div class="card-body">
+          <table class='table table-striped' *ngIf="families">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let family of families">
+                  <td>{{ family.familyId }}</td>
+                  <td>{{ family.name }}</td>
+                </tr>
+              </tbody>
+            </table>
+      </div>
+    </div>
+  </div>
+  

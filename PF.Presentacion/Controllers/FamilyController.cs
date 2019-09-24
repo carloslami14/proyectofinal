@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PF.Dominio.Interfaces.Model;
 using PF.Dominio.Model;
@@ -15,22 +16,46 @@ namespace PF.Presentacion.Controllers
             _familyRepository = familyRepository;
         }
 
-        [HttpPost("[action]")]
-        public void Create(Family family)
+        // GET: api/Families
+        [HttpGet]
+        public async Task<IActionResult> GetFamilies()
         {
-            _familyRepository.Add(family);
+            var families = await _familyRepository.GetAll();
+            return Ok(families);
         }
 
-        [HttpGet("[action]")]
-        public IEnumerable<Family> GetAllFamilies()
+        // GET: api/Family/5
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetFamily([FromRoute] int id)
         {
-            return _familyRepository.GetAll();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var family = await _familyRepository.GetById(id);
+
+            if (family == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(family);
         }
 
-        [HttpGet("[action]")]
-        public Family GetFamilyById(int id)
+        // POST: api/Bancos
+        [HttpPost]
+        public async Task<IActionResult> PostFamily([FromBody] Family family)
         {
-            return _familyRepository.GetById(id);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            _context.Bancos.Add(banco);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetBanco", new { id = banco.BancoId }, banco);
         }
     }
 }
