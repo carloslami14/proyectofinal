@@ -8,11 +8,20 @@ import { Component } from '@angular/core';
 export class NavMenuComponent {
   isExpanded = false;
 
-  collapse() {
-    this.isExpanded = false;
-  }
+  toggleNav() {
+    if(this.isExpanded==false){
+      document.getElementById("sidebar").style.width = "250px";
+      document.getElementById("main").style.marginLeft = "250px";
 
-  toggle() {
-    this.isExpanded = !this.isExpanded;
+      this.isExpanded=true;
+
+      console.log(this.isExpanded);
+    }else{
+      document.getElementById("sidebar").style.width = "0";
+      document.getElementById("main").style.marginLeft = "0";
+
+       this.isExpanded=false;
+       console.log(this.isExpanded);
+    }
   }
 }

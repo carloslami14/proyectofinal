@@ -1,58 +1,19 @@
-<!-- <header>
-  <nav class='navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3'>
-    <div class="container">
-      <a class="navbar-brand" [routerLink]='["/"]'>Sistema Gestor de Obras</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-label="Toggle navigation"
-        [attr.aria-expanded]="isExpanded" (click)="toggle()">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" [ngClass]='{"show": isExpanded}'>
-        <ul class="navbar-nav flex-grow">
-          <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
-            <a class="nav-link text-dark" [routerLink]='["/"]'>Home</a>
-          </li>
-          <li class="nav-item" [routerLinkActive]='["link-active"]'>
-            <a class="nav-link text-dark" [routerLink]='["/counter"]'>Counter</a>
-          </li>
-          <li class="nav-item" [routerLinkActive]='["link-active"]'>
-            <a class="nav-link text-dark" [routerLink]='["/fetch-data"]'>Fetch data</a>
-          </li>
-          <li class="nav-item dropdown" dropdown>
-            <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-            Basic dropdown<span class="caret"></span></a>
-            <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-                <a class="dropdown-item waves-light" mdbWavesEffect href="#">Action</a>
-                <a class="dropdown-item waves-light" mdbWavesEffect href="#">Another action</a>
-                <a class="dropdown-item waves-light" mdbWavesEffect href="#">Something else here</a>
-                <div class="divider dropdown-divider"></div>
-                <a class="dropdown-item waves-light" mdbWavesEffect href="#">Separated link</a>
-            </div>
-        </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-</header> -->
-<div>
+
+<div id="main">
     <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+
+      <button class="openbtn btn-primary mr-3" (click)="toggleNav()">&#9776;</button>
+
       <a class="navbar-brand" [routerLink]='["/"]'>Sistema Gestor de Obras</a>
       
-      <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-label="Toggle navigation"
-        [attr.aria-expanded]="isExpanded" (click)="toggle()">
-        <span class="navbar-toggler-icon"></span>
-      </button> -->
-      
-      <div class="collapse navbar-collapse xnavbar-nav xnav">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link nav-link" [routerLink]="['/']" routerLinkActive="['link-active']" >Home</a>
-          </li>
-
-          <li class="nav-item">
-              <a class="nav-link nav-link" [routerLink]="['/families']" routerLinkActive="['link-active']" >Familias</a>
-          </li>
-        </ul>  
-      </div>   
-      </div>
+      <div class="collapse navbar-collapse xnavbar-nav xnav"></div>   
     </div>
+</div>
 
+<div id="sidebar" class="sidebar">
+    <a href="#" class="mt-3">Estudio</a>
+    <a href="#">Proyectos</a>
+    <a href="#">Calculo metrico</a>
+    <a href="#"></a>
+    <a href="#">Salir</a>
+</div>

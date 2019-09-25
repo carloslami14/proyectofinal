@@ -9927,3 +9927,63 @@ label,
 .btn-space {
   margin-right: 5px;
 }
+
+
+/* ----AGREGADO---- */
+.sidebar {
+	height: 100%;
+	width: 0;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: #df691a;
+	overflow-x: hidden;
+	transition: 0.5s;
+	padding-top: 60px;
+  }
+  
+  .sidebar a {
+	padding: 8px 8px 8px 32px;
+	text-decoration: none;
+	font-size: 25px;
+	color: whitesmoke;
+	display: block;
+	transition: 0.3s;
+  }
+  
+  .sidebar a:hover {
+	color: 0 0 0 0.2rem rgba(228, 128, 60, 0.5);
+  }
+  
+  .sidebar .closebtn {
+	position: absolute;
+	top: 0;
+	right: 25px;
+	font-size: 36px;
+	margin-left: 50px;
+  }
+  
+  .openbtn {
+	font-size: 30px;
+	cursor: pointer;
+	background-color: #df691a;
+	color: white;
+	padding: 10px 15px;
+	border: none;
+  }
+  
+  .openbtn:hover {
+	background-color: #444;
+  }
+  
+  #main {
+	transition: margin-left .5s;
+	padding: 16px;
+  }
+  
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+	.sidebar {padding-top: 15px;}
+	.sidebar a {font-size: 18px;}
+  }
