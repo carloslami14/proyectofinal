@@ -32,7 +32,7 @@ import { FamiliesFormComponent } from './families/families-form/families-form.co
         FormsModule,
         ReactiveFormsModule,
         RouterModule.forRoot([
-            { path: '', component: HomeComponent, pathMatch: 'full' },
+            { path: '', component: NavMenuComponent, pathMatch: 'full' },
             { path: 'families', component: FamiliesComponent },
             { path: 'families-add', component: FamiliesFormComponent },
             { path: 'families-edit/:id', component: FamiliesFormComponent },

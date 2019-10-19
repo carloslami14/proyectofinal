@@ -24,6 +24,7 @@
               "src/assets"
             ],
             "styles": [
+              "../node_modules/fort-awesome/fontawesome-free/css/all.css",
               "src/css/bootstrap.superhero.min.css",
               "src/styles.css"
             ],

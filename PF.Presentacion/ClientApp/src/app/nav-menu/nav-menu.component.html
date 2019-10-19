@@ -1,19 +1,57 @@
 
-<div id="main">
-    <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
-
-      <button class="openbtn btn-primary mr-3" (click)="toggleNav()">&#9776;</button>
-
-      <a class="navbar-brand" [routerLink]='["/"]'>Sistema Gestor de Obras</a>
-      
-      <div class="collapse navbar-collapse xnavbar-nav xnav"></div>   
-    </div>
+<div>
+  <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+      <a class="navbar-brand" [routerLink]="['/']">
+        <img src="assets/img/logo.png" >
+      </a>
+    <div class="collapse navbar-collapse xnavbar-nav xnav"></div>   
+  </div>
+  <app-home></app-home>
 </div>
 
-<div id="sidebar" class="sidebar">
-    <a href="#" class="mt-3">Estudio</a>
+<div class="sidebar">
+    <div class="user-info">
+        <button class="btn user-icon">
+            <i class="fa fa-user"></i>
+        </button>
+
+        <div>
+          <label>Usuario Administrador</label>
+  
+          <label>Ver perfil</label> 
+        </div>
+    </div>
+  
+    <hr class="my-2"/>
+    
+    <!-- <a href="#">Estudio</a>
     <a href="#">Proyectos</a>
     <a href="#">Calculo metrico</a>
-    <a href="#"></a>
-    <a href="#">Salir</a>
+    <a href="#">Configuracion</a>
+
+    <a href="#">Salir</a> -->
+
+    <li class="sidebar-item" id="estudio">
+      <a class="sidebar-btn" href="#estudio">Estudio</a>
+      <div class="sidebar-smenu">
+          <a href="#">Miembros</a>
+      </div>
+    </li>
+    <li class="sidebar-item" id="proyectos">
+      <a class="sidebar-btn" href="#proyectos">Proyectos</a>
+      <div class="sidebar-smenu">
+        <a href="#">Nuevo proyecto</a>
+        <a href="#">Listado de proyectos</a>
+      </div>
+    </li>
+    <li class="sidebar-item" id="calculoMetrico">
+        <a class="sidebar-btn" href="#calculoMetrico">Calculo metrico</a>
+    </li>
+    <li class="sidebar-item" id="configuracion">
+        <a class="sidebar-btn" href="#configuracion">Configuracion</a>
+    </li>
+    <li class="sidebar-item" id="salir">
+        <a class="sidebar-btn" href="#">Salir</a>
+    </li>
+    
 </div>

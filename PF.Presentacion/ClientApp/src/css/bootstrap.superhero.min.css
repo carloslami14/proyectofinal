@@ -9931,39 +9931,152 @@ label,
 
 /* ----AGREGADO---- */
 .sidebar {
+	margin-top: 60px;
 	height: 100%;
-	width: 0;
+	width: 300px;
 	position: fixed;
 	z-index: 1;
 	top: 0;
 	left: 0;
-	background-color: #df691a;
+	background-color: #bd5917;
 	overflow-x: hidden;
-	transition: 0.5s;
 	padding-top: 60px;
+	text-decoration-line: none;
   }
+
+  .sidebar-item {
+	padding: 8px 8px 8px 25px;
+	text-decoration: none;
+	font-size: 25px;
+	color: white;
+	display: block;
+	overflow:hidden;
+}
+
+.sidebar-item a:hover{
+	text-decoration: none;
+	color: whitesmoke;
+}
+
+.sidebar-btn{
+	display: block;
+	color: white;
+	position: relative;
+	text-decoration: none;
+}
+
+.sidebar-btn:before{
+	content: "";
+	position: absolute;
+	width: 12px;
+	height: 12px;
+}
+
+.sidebar-smenu{
+	overflow: hidden;
+	transition: max-height 0.3s;
+	max-height: 0;
+}
+
+.sidebar-smenu a{
+	display: block;
+	padding: 5px 20px;
+	color: white;
+	font-size: 20px;
+	margin-left: 10px 0;
+	position: relative;
+}
+
+.sidebar-smenu a:before{
+	 content: "";
+	 background: white;
+	 position: absolute;
+	 width: 6px;
+	 height: 100%;
+	 left: 0;
+	 top: 0;
+	 transition: 0.3s;
+	 opacity: 0;
+}
+
+.sidebar-smenu a:hover:before{
+	opacity: 1;
+}
+
+.sidebar-item:target .sidebar-smenu{
+ 	max-height: 10em;
+}
   
-  .sidebar a {
-	padding: 8px 8px 8px 32px;
+  /* .sidebar a {
+	padding: 8px 8px 8px 25px;
 	text-decoration: none;
 	font-size: 25px;
 	color: whitesmoke;
 	display: block;
-	transition: 0.3s;
+	overflow:hidden;
   }
   
-  .sidebar a:hover {
-	color: 0 0 0 0.2rem rgba(228, 128, 60, 0.5);
-  }
+  .sidebar a:before {
+	font-family: "Font Awesome"; 
+	content: "\f111";
+
+	color: white;
+
+	position: absolute;
+
+	left: 0;
+	transition:all 0.3s ease;
+	opacity: 0;					
+}
+
+  .sidebar a:hover:before {
+	opacity: 1;
+  } */
+
+  /* .sidebar li {
+	padding: 8px 8px 8px 25px;
+	text-decoration: none;
+	font-size: 25px;
+	color: whitesmoke;
+	display: block;
+	overflow:hidden;
+  } */
   
-  .sidebar .closebtn {
+  /* .sidebar li:before {
+	font-family: "Font Awesome"; 
+	content: "\f111";
+
+	color: white;
+
+	position: absolute;
+
+	left: 0;
+	transition:all 0.3s ease;
+	opacity: 0;
+} */
+
+  /* .sidebar li:hover:before {
+	opacity: 1;
+  }
+*/
+  
+/* 
+  .sidebar-item a:before{
+	opacity: 0;
+}
+.sidebar-item a:hover:before{
+	opacity: 1;
+} */
+  
+  
+  /* .sidebar .closebtn {
 	position: absolute;
 	top: 0;
 	right: 25px;
 	font-size: 36px;
 	margin-left: 50px;
-  }
-  
+  } */
+/*   
   .openbtn {
 	font-size: 30px;
 	cursor: pointer;
@@ -9971,15 +10084,16 @@ label,
 	color: white;
 	padding: 10px 15px;
 	border: none;
-  }
+  } */
   
-  .openbtn:hover {
+  /* .openbtn:hover {
 	background-color: #444;
-  }
+  } */
   
   #main {
 	transition: margin-left .5s;
 	padding: 16px;
+	margin-left: 300px;
   }
   
   /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
@@ -9987,3 +10101,29 @@ label,
 	.sidebar {padding-top: 15px;}
 	.sidebar a {font-size: 18px;}
   }
+
+  .user-icon{
+	background-color: #4e5d6c;
+	border-radius: 50px;
+	height: 50px;
+	width: 50px;
+	
+  }
+
+  .user-icon i{
+	  font-size: 35px;
+  }
+
+  .user-info{
+	padding: 2px 8px 8px 32px;
+  }
+
+  .user-info div{
+	  display: grid;
+	  position: absolute;
+	  top: 61px; 
+	  left: 92px;
+	  padding-top: 2px;
+	  padding-bottom: 5px;
+  }
+  
