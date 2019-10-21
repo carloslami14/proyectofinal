@@ -19,21 +19,7 @@ namespace PF.Persistencia.Context
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //IConfigurationRoot configuration = new ConfigurationBuilder()
-            //   .SetBasePath()
-            //   .AddJsonFile("appsettings.json")
-            //   .Build();
-            //optionsBuilder.UseSqlServer(configuration.GetConnectionString("SqlServerConnection"));
-
-            //if (!optionsBuilder.IsConfigured)
-            //{
-            //    // MySql
-            //    //optionsBuilder.UseMySQL("server=localhost;port=33060;database=FinalProject;Uid=root;Pwd=C@rl0sLam1!;");
-
-            //    // Sql Server
-            //    optionsBuilder.UseSqlServer("Server=DESKTOP-6EN2SIQ\\SQLEXPRESS;Database=ProyectoFinal;Trusted_Connection=True;MultipleActiveResultSets=true;");
-
-            //}
+           
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

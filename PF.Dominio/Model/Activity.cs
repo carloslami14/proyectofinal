@@ -8,7 +8,6 @@ namespace PF.Dominio.Model
         {
             Items = new HashSet<Item>();
         }
-        public int ActivityId { get; set; }
         public string Name { get; set; }
         public double Cost { get; set; }
         public virtual ICollection<Item> Items { get; set; }

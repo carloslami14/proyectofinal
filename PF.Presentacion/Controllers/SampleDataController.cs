@@ -17,11 +17,5 @@ namespace PF.Presentacion.Controllers
         {
             _familyRepository = familyRepository;
         }
-
-        [HttpGet("[action]")]
-        public IEnumerable<Family> WeatherForecasts()
-        {
-            return _familyRepository.GetAll();
-        }
     }
 }

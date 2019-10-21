@@ -9,7 +9,6 @@ namespace PF.Dominio.Model
             Materials = new HashSet<Material>();
             Items = new HashSet<Item>();
         }
-        public int ItemId { get; set; }
         public string Name { get; set; }
         public double Price { get; set; }
         public virtual ICollection<Material> Materials { get; set; }

@@ -33,6 +33,7 @@
     "ngx-loading": "^3.0.1",
     "popper.js": "^1.15.0",
     "rxjs": "^6.5.2",
+    "sweetalert2": "^8.17.6",
     "zone.js": "^0.9.1"
   },
   "devDependencies": {

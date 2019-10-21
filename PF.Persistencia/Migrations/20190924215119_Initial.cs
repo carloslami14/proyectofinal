@@ -1,10 +1,10 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using MySql.Data.EntityFrameworkCore.Storage.Internal;
 
 namespace PF.Persistencia.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,9 +12,8 @@ namespace PF.Persistencia.Migrations
                 name: "Constructions",
                 columns: table => new
                 {
-                    ConstructionId = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
-                    BaseId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ModificationDate = table.Column<DateTime>(nullable: false),
                     State = table.Column<int>(nullable: false),
                     Nombre = table.Column<string>(nullable: true),
@@ -24,32 +23,30 @@ namespace PF.Persistencia.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Constructions", x => x.ConstructionId);
+                    table.PrimaryKey("PK_Constructions", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Families",
                 columns: table => new
                 {
-                    FamilyId = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
-                    BaseId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ModificationDate = table.Column<DateTime>(nullable: false),
                     State = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Families", x => x.FamilyId);
+                    table.PrimaryKey("PK_Families", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Permissions",
                 columns: table => new
                 {
-                    PermissionId = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
-                    BaseId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ModificationDate = table.Column<DateTime>(nullable: false),
                     State = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
@@ -57,16 +54,15 @@ namespace PF.Persistencia.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Permissions", x => x.PermissionId);
+                    table.PrimaryKey("PK_Permissions", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Providers",
                 columns: table => new
                 {
-                    ProviderId = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
-                    BaseId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ModificationDate = table.Column<DateTime>(nullable: false),
                     State = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
@@ -75,32 +71,30 @@ namespace PF.Persistencia.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Providers", x => x.ProviderId);
+                    table.PrimaryKey("PK_Providers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
                 {
-                    RolId = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
-                    BaseId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ModificationDate = table.Column<DateTime>(nullable: false),
                     State = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Roles", x => x.RolId);
+                    table.PrimaryKey("PK_Roles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
-                    BaseId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ModificationDate = table.Column<DateTime>(nullable: false),
                     State = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
@@ -109,16 +103,15 @@ namespace PF.Persistencia.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.UserId);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Activities",
                 columns: table => new
                 {
-                    ActivityId = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
-                    BaseId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ModificationDate = table.Column<DateTime>(nullable: false),
                     State = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
@@ -127,12 +120,12 @@ namespace PF.Persistencia.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Activities", x => x.ActivityId);
+                    table.PrimaryKey("PK_Activities", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Activities_Constructions_ConstructionId",
                         column: x => x.ConstructionId,
                         principalTable: "Constructions",
-                        principalColumn: "ConstructionId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -140,9 +133,8 @@ namespace PF.Persistencia.Migrations
                 name: "Categories",
                 columns: table => new
                 {
-                    CategoryId = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
-                    BaseId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ModificationDate = table.Column<DateTime>(nullable: false),
                     State = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
@@ -150,12 +142,12 @@ namespace PF.Persistencia.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories", x => x.CategoryId);
+                    table.PrimaryKey("PK_Categories", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Categories_Families_FamilyId",
                         column: x => x.FamilyId,
                         principalTable: "Families",
-                        principalColumn: "FamilyId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -163,30 +155,29 @@ namespace PF.Persistencia.Migrations
                 name: "Items",
                 columns: table => new
                 {
-                    ItemId = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
-                    BaseId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ModificationDate = table.Column<DateTime>(nullable: false),
                     State = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Price = table.Column<double>(nullable: false),
                     ActivityId = table.Column<int>(nullable: true),
-                    ItemId1 = table.Column<int>(nullable: true)
+                    ItemId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Items", x => x.ItemId);
+                    table.PrimaryKey("PK_Items", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Items_Activities_ActivityId",
                         column: x => x.ActivityId,
                         principalTable: "Activities",
-                        principalColumn: "ActivityId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Items_Items_ItemId1",
-                        column: x => x.ItemId1,
+                        name: "FK_Items_Items_ItemId",
+                        column: x => x.ItemId,
                         principalTable: "Items",
-                        principalColumn: "ItemId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -194,9 +185,8 @@ namespace PF.Persistencia.Migrations
                 name: "Materials",
                 columns: table => new
                 {
-                    MaterialId = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
-                    BaseId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ModificationDate = table.Column<DateTime>(nullable: false),
                     State = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
@@ -207,18 +197,18 @@ namespace PF.Persistencia.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Materials", x => x.MaterialId);
+                    table.PrimaryKey("PK_Materials", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Materials_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
-                        principalColumn: "CategoryId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Materials_Items_ItemId",
                         column: x => x.ItemId,
                         principalTable: "Items",
-                        principalColumn: "ItemId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -238,9 +228,9 @@ namespace PF.Persistencia.Migrations
                 column: "ActivityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Items_ItemId1",
+                name: "IX_Items_ItemId",
                 table: "Items",
-                column: "ItemId1");
+                column: "ItemId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Materials_CategoryId",
