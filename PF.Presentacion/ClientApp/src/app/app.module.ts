@@ -14,6 +14,7 @@ import { FamilyComponent } from './family/family/family.component';
 
 //Third party imports
 import { NgxLoadingModule } from "ngx-loading";
+import { CalculationComponent } from './calculation/calculation.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { NgxLoadingModule } from "ngx-loading";
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    FamilyComponent
+    FamilyComponent,
+    CalculationComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
