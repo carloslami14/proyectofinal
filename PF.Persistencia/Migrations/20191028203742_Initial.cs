@@ -191,7 +191,7 @@ namespace PF.Persistencia.Migrations
                     State = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Price = table.Column<double>(nullable: false),
-                    Unity = table.Column<int>(nullable: false),
+                    Unit = table.Column<int>(nullable: false),
                     CategoryId = table.Column<int>(nullable: false),
                     ItemId = table.Column<int>(nullable: true)
                 },

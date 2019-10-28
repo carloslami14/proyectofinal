@@ -1,0 +1,64 @@
+<h1>{{EditionMode ? 'Editar' : 'Agregar'}} Material</h1>
+<form class="form-horizontal" novalidate
+      (ngSubmit)="save()" [formGroup]="formGroup">
+  <fieldset>
+    <div class="form-group">
+      <label class="col-md-2 control-label">Nombre</label>
+      <div class="col-md-8">
+        <input class="form-control"
+               id="name"
+               type="text"
+               required
+               formControlName="name" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-2 control-label">Precio</label>
+      <div class="col-md-8">
+        <input class="form-control"
+               id="price"
+               type="number"
+               required
+               formControlName="price" />
+      </div>
+    </div>
+
+    <!--<div class="form-group">
+      <label class="col-md-2 control-label">Unidad</label>
+      <div class="col-md-3 ">
+        <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="categoryId" (change)="onSelectUnit($event.target.value)" style="width:150px;">
+          <option value="0">--Unidades--</option>
+          <option *ngFor="let unit of units" value={{unit.id}}>{{unit.name}}</option>
+        </select>
+      </div>
+    </div>-->
+
+    <div class="form-group">
+      <label class="col-md-2 control-label">Categoria</label>
+      <div class="col-md-3 ">
+        <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="categoryId" (change)="onSelectCategory($event.target.value)" style="width:150px;">
+          <option value="0">--Categorias--</option>
+          <option *ngFor="let category of categories" value={{category.id}}>{{category.name}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-md-4 col-md-offset-2">
+        <span>
+          <button class="btn btn-primary"
+                  type="submit"
+                  [disabled]="!formGroup.valid">
+            Guardar
+          </button>
+          <button class="btn"
+                  type="button"
+                  [routerLink]='["/categories"]'>
+            Cancelar
+          </button>
+        </span>
+      </div>
+    </div>
+  </fieldset>
+</form>

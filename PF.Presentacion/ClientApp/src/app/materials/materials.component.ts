@@ -1,25 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { FamiliesService } from './families.service';
-import { IFamily } from './family';
-import { error } from '@angular/compiler/src/util';
+import { IMaterial } from './material';
+import { MaterialsService } from './materials.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-families',
-  templateUrl: './families.component.html',
-  styleUrls: ['./families.component.css']
+    selector: 'app-materials',
+    templateUrl: './materials.component.html',
+    styleUrls: ['./materials.component.css']
 })
-export class FamiliesComponent implements OnInit {
-    // Properties
-    families: IFamily[];
+export class MaterialsComponent implements OnInit {
 
-    constructor(private familiesServices: FamiliesService) { }
+    // Properties
+    materials: IMaterial[] = [];
+
+    constructor(private materialsServices: MaterialsService) { }
 
     ngOnInit() {
         this.loadData(false);
     }
 
-    deleteFamily(family: IFamily) {
+    deleteMaterial(material: IMaterial) {
         Swal.fire({
             title: '¿Esta seguro que desea eliminar?',
             text: "No podra deshacer el cambio",
@@ -30,7 +30,7 @@ export class FamiliesComponent implements OnInit {
             confirmButtonText: 'Si, eliminar!'
         }).then((result) => {
             if (result.value) {
-                this.familiesServices.deleteFamily(family.id.toString())
+                this.materialsServices.deleteMaterial(material.id.toString())
                     .subscribe(() => this.loadData(true),
                         error => console.error(error));
             }
@@ -41,13 +41,13 @@ export class FamiliesComponent implements OnInit {
         if (message) {
             Swal.fire(
                 'Eliminado!',
-                'Esta familia ha sido eliminada',
+                'Este material ha sido eliminada',
                 'success'
             )
         }
 
-        this.familiesServices.getFamilies()
-            .subscribe(families => this.families = families,
+        this.materialsServices.getMaterials()
+            .subscribe(materials => this.materials = materials,
                 error => console.error(error));
     }
 }

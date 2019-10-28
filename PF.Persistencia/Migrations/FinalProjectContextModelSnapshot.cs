@@ -148,7 +148,7 @@ namespace PF.Persistencia.Migrations
 
                     b.Property<int>("State");
 
-                    b.Property<int>("Unity");
+                    b.Property<int>("Unit");
 
                     b.HasKey("Id");
 

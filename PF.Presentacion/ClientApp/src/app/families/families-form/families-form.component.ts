@@ -28,12 +28,12 @@ export class FamiliesFormComponent implements OnInit {
         });
 
         this.activatedRouter.params.subscribe(params => {
-            if (params['id'] == undefined) {
-                // Create family
+            if (params['id'] === undefined) {
+                // Create Family
                 return;
             }
 
-            // Edit family
+            // Edit Family
             this.editionMode = true;
             this.familyId = params['id'];
             this.familiesServices.getFamilyById(this.familyId.toString())
@@ -56,12 +56,12 @@ export class FamiliesFormComponent implements OnInit {
             // Edit family
             family.id = this.familyId;
             this.familiesServices.updateFamily(family)
-                .subscribe(family => this.onSaveSuccess(),
+                .subscribe(() => this.onSaveSuccess(),
                     error => console.error(error));
         } else {
             // Create family
             this.familiesServices.createFamily(family)
-                .subscribe(family => this.onSaveSuccess(),
+                .subscribe(() => this.onSaveSuccess(),
                     error => console.error(error));
         }
     }

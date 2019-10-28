@@ -1,52 +1,52 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
+using System.Text;
+using PF.Dominio;
 using PF.Dominio.Interfaces.Model;
 using PF.Dominio.Model;
 using PF.Persistencia.Context;
-using Microsoft.EntityFrameworkCore;
-using PF.Dominio.Interfaces;
-using System.Collections.Generic;
-using PF.Dominio;
 
 namespace PF.Persistencia.Repository
 {
-    public class FamilyRepository : IFamilyRepository
+    public class CategoryRepository : ICategoryRepository
     {
         private readonly FinalProjectContext _context;
-        public FamilyRepository(FinalProjectContext context)
+
+        public CategoryRepository(FinalProjectContext context)
         {
             _context = context;
         }
-        public void Add(Family entity)
+
+        public void Add(Category entity)
         {
             entity.ModificationDate = DateTime.Today;
             entity.State = State.Enabled;
-            _context.Families.Add(entity);
+            _context.Categories.Add(entity);
         }
 
-        public void Delete(Family entity)
+        public void Delete(Category entity)
         {
             entity.ModificationDate = DateTime.Today;
             entity.State = State.Removed;
             _context.Update(entity);
         }
 
-        public void Edit(Family entity)
+        public void Edit(Category entity)
         {
             entity.ModificationDate = DateTime.Today;
             entity.State = State.Enabled;
             _context.Update(entity);
         }
-        
-        public Family GetById(int Id)
+
+        public Category GetById(int Id)
         {
-            return _context.Families.FirstOrDefault(fl => fl.Id == Id && fl.State == State.Enabled);
+            return _context.Categories.FirstOrDefault(fl => fl.Id == Id && fl.State == State.Enabled);
         }
 
-        public IEnumerable<Family> GetAll()
+        public IEnumerable<Category> GetAll()
         {
-            return _context.Families.Where(families => families.State == State.Enabled);
+            return _context.Categories.Where(categories => categories.State == State.Enabled);
         }
 
         public void Save()

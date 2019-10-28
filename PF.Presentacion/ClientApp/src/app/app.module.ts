@@ -15,6 +15,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxLoadingModule } from "ngx-loading";
 import { FamiliesComponent } from './families/families.component';
 import { FamiliesFormComponent } from './families/families-form/families-form.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { CategoriesFormComponent } from './categories/categories-form/categories-form.component';
+import { MaterialsComponent } from './materials/materials.component';
+import { MaterialsFormComponent } from './materials/materials-form/materials-form.component';
 
 @NgModule({
     declarations: [
@@ -24,7 +28,11 @@ import { FamiliesFormComponent } from './families/families-form/families-form.co
         CounterComponent,
         FetchDataComponent,
         FamiliesComponent,
-        FamiliesFormComponent
+        FamiliesFormComponent,
+        CategoriesComponent,
+        CategoriesFormComponent,
+        MaterialsComponent,
+        MaterialsFormComponent
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -36,6 +44,12 @@ import { FamiliesFormComponent } from './families/families-form/families-form.co
             { path: 'families', component: FamiliesComponent },
             { path: 'families-add', component: FamiliesFormComponent },
             { path: 'families-edit/:id', component: FamiliesFormComponent },
+            { path: 'categories', component: CategoriesComponent },
+            { path: 'categories-add', component: CategoriesFormComponent },
+            { path: 'categories-edit/:id', component: CategoriesFormComponent },
+            { path: 'materials', component: MaterialsComponent },
+            { path: 'materials-add', component: MaterialsFormComponent },
+            { path: 'materials-edit/:id', component: MaterialsFormComponent },
         ]),
         BrowserAnimationsModule,
         NgxLoadingModule.forRoot({})

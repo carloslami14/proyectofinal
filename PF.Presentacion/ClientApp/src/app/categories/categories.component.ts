@@ -1,25 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { FamiliesService } from './families.service';
-import { IFamily } from './family';
-import { error } from '@angular/compiler/src/util';
+import { ICategory } from './category';
+import { CategoriesService } from './categories.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-families',
-  templateUrl: './families.component.html',
-  styleUrls: ['./families.component.css']
+    selector: 'app-categories',
+    templateUrl: './categories.component.html',
+    styleUrls: ['./categories.component.css']
 })
-export class FamiliesComponent implements OnInit {
-    // Properties
-    families: IFamily[];
+export class CategoriesComponent implements OnInit {
 
-    constructor(private familiesServices: FamiliesService) { }
+    // Properties
+    categories: ICategory[];
+
+    constructor(private categoriesServices: CategoriesService) { }
 
     ngOnInit() {
         this.loadData(false);
     }
 
-    deleteFamily(family: IFamily) {
+    deleteFamily(category: ICategory) {
         Swal.fire({
             title: '¿Esta seguro que desea eliminar?',
             text: "No podra deshacer el cambio",
@@ -30,7 +30,7 @@ export class FamiliesComponent implements OnInit {
             confirmButtonText: 'Si, eliminar!'
         }).then((result) => {
             if (result.value) {
-                this.familiesServices.deleteFamily(family.id.toString())
+                this.categoriesServices.deleteCategory(category.id.toString())
                     .subscribe(() => this.loadData(true),
                         error => console.error(error));
             }
@@ -41,13 +41,13 @@ export class FamiliesComponent implements OnInit {
         if (message) {
             Swal.fire(
                 'Eliminado!',
-                'Esta familia ha sido eliminada',
+                'Esta categoria ha sido eliminada',
                 'success'
             )
         }
 
-        this.familiesServices.getFamilies()
-            .subscribe(families => this.families = families,
+        this.categoriesServices.getCategories()
+            .subscribe(categories => this.categories = categories,
                 error => console.error(error));
     }
 }

@@ -1,52 +1,51 @@
-using System;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using PF.Dominio;
 using PF.Dominio.Interfaces.Model;
 using PF.Dominio.Model;
 using PF.Persistencia.Context;
-using Microsoft.EntityFrameworkCore;
-using PF.Dominio.Interfaces;
+using System;
 using System.Collections.Generic;
-using PF.Dominio;
+using System.Linq;
+using System.Text;
 
 namespace PF.Persistencia.Repository
 {
-    public class FamilyRepository : IFamilyRepository
+    public class MaterialRepository : IMaterialRepository
     {
         private readonly FinalProjectContext _context;
-        public FamilyRepository(FinalProjectContext context)
+        public MaterialRepository(FinalProjectContext context)
         {
             _context = context;
         }
-        public void Add(Family entity)
+        
+        public void Add(Material entity)
         {
             entity.ModificationDate = DateTime.Today;
             entity.State = State.Enabled;
-            _context.Families.Add(entity);
+            _context.Materials.Add(entity);
         }
 
-        public void Delete(Family entity)
+        public void Delete(Material entity)
         {
             entity.ModificationDate = DateTime.Today;
             entity.State = State.Removed;
             _context.Update(entity);
         }
 
-        public void Edit(Family entity)
+        public void Edit(Material entity)
         {
             entity.ModificationDate = DateTime.Today;
             entity.State = State.Enabled;
             _context.Update(entity);
         }
-        
-        public Family GetById(int Id)
+
+        public Material GetById(int Id)
         {
-            return _context.Families.FirstOrDefault(fl => fl.Id == Id && fl.State == State.Enabled);
+            return _context.Materials.FirstOrDefault(material => material.Id == Id && material.State == State.Enabled);
         }
 
-        public IEnumerable<Family> GetAll()
+        public IEnumerable<Material> GetAll()
         {
-            return _context.Families.Where(families => families.State == State.Enabled);
+            return _context.Materials.Where(materials => materials.State == State.Enabled);
         }
 
         public void Save()

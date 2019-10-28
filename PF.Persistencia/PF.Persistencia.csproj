@@ -5,6 +5,8 @@
     <Compile Remove="Migrations\20190908155934_initial.Designer.cs" />
     <Compile Remove="Migrations\20190924214422_Delete pk ids of tables.cs" />
     <Compile Remove="Migrations\20190924214422_Delete pk ids of tables.Designer.cs" />
+    <Compile Remove="Migrations\20191028203702_Initials.cs" />
+    <Compile Remove="Migrations\20191028203702_Initials.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -102,7 +102,7 @@ namespace PF.Presentacion.Controllers
 
         private bool FamilyExists(int id)
         {
-            return _familyRepository.GetAll().Any(family => family.Id == id);
+            return _familyRepository.GetById(id) != null;
         }
     }
 }

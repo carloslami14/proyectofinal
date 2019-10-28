@@ -10,7 +10,7 @@ using PF.Persistencia.Context;
 namespace PF.Persistencia.Migrations
 {
     [DbContext(typeof(FinalProjectContext))]
-    [Migration("20190924215119_Initial")]
+    [Migration("20191028203742_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -150,7 +150,7 @@ namespace PF.Persistencia.Migrations
 
                     b.Property<int>("State");
 
-                    b.Property<int>("Unity");
+                    b.Property<int>("Unit");
 
                     b.HasKey("Id");
 
