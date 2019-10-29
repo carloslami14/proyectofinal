@@ -1,25 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { FamiliesService } from './families.service';
-import { IFamily } from './family';
-import { error } from '@angular/compiler/src/util';
+import { IItem } from './item';
+import { ItemsService } from './items.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-families',
-  templateUrl: './families.component.html',
-  styleUrls: ['./families.component.css']
+    selector: 'app-items',
+    templateUrl: './items.component.html',
+    styleUrls: ['./items.component.css']
 })
-export class FamiliesComponent implements OnInit {
-    // Properties
-    families: IFamily[] = [];
+export class ItemsComponent implements OnInit {
 
-    constructor(private familiesServices: FamiliesService) { }
+    // Properties
+    items: IItem[] = [];
+
+    constructor(private itemsServices: ItemsService) { }
 
     ngOnInit() {
         this.loadData(false);
     }
 
-    deleteFamily(family: IFamily) {
+    deleteItem(item: IItem) {
         Swal.fire({
             title: '¿Esta seguro que desea eliminar?',
             text: "No podra deshacer el cambio",
@@ -30,7 +30,7 @@ export class FamiliesComponent implements OnInit {
             confirmButtonText: 'Si, eliminar!'
         }).then((result) => {
             if (result.value) {
-                this.familiesServices.deleteFamily(family.id.toString())
+                this.itemsServices.deleteItem(item.id.toString())
                     .subscribe(() => this.loadData(true),
                         error => console.error(error));
             }
@@ -41,13 +41,13 @@ export class FamiliesComponent implements OnInit {
         if (message) {
             Swal.fire(
                 'Eliminado!',
-                'Esta familia ha sido eliminada',
+                'Este item ha sido eliminado',
                 'success'
             )
         }
 
-        this.familiesServices.getFamilies()
-            .subscribe(families => this.families = families,
+        this.itemsServices.getItems()
+            .subscribe(items => this.items = items,
                 error => console.error(error));
     }
 }

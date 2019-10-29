@@ -29,6 +29,7 @@
   <ItemGroup>
     <None Remove="ClientApp\src\app\categories\category.ts" />
     <None Remove="ClientApp\src\app\enums\unit.ts" />
+    <None Remove="ClientApp\src\app\items\item.ts" />
     <None Remove="ClientApp\src\app\materials\material.ts" />
   </ItemGroup>
 
@@ -40,6 +41,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\categories\category.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\enums\unit.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\items\item.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\materials\material.ts" />
   </ItemGroup>
 

@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 export class CategoriesComponent implements OnInit {
 
     // Properties
-    categories: ICategory[];
+    categories: ICategory[] = [];
 
     constructor(private categoriesServices: CategoriesService) { }
 

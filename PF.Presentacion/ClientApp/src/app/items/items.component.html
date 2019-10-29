@@ -1,0 +1,38 @@
+<div>
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">Items</h3>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <a [routerLink]="['/items-add']" routerLinkActive="router-link-active" class="btn btn-sm btn-primary float-right">Agregar</a>
+    </div>
+    <div class="card-body">
+      <table class='table table-striped' *ngIf="items">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of items">
+            <td>{{ item.id }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.price }}</td>
+            <td>
+              <div class="btn-group">
+                <button class="btn btn-danger btn-space" (click)="deleteItem(item)">Eliminar</button>
+                <button class="btn btn-primary btn-space" [routerLink]="['/items-edit/' + item.id]">Modificar</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -30,7 +30,8 @@ namespace PF.Presentacion
             services.AddTransient<IFamilyRepository, FamilyRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IMaterialRepository, MaterialRepository>();
-
+            services.AddTransient<IItemRepository, ItemRepository>();
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             // In production, the Angular files will be served from this directory

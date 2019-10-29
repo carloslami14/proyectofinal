@@ -19,6 +19,8 @@ import { CategoriesComponent } from './categories/categories.component';
 import { CategoriesFormComponent } from './categories/categories-form/categories-form.component';
 import { MaterialsComponent } from './materials/materials.component';
 import { MaterialsFormComponent } from './materials/materials-form/materials-form.component';
+import { ItemsComponent } from './items/items.component';
+import { ItemsFormComponent } from './items/items-form/items-form.component';
 
 @NgModule({
     declarations: [
@@ -32,7 +34,9 @@ import { MaterialsFormComponent } from './materials/materials-form/materials-for
         CategoriesComponent,
         CategoriesFormComponent,
         MaterialsComponent,
-        MaterialsFormComponent
+        MaterialsFormComponent,
+        ItemsComponent,
+        ItemsFormComponent
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -50,6 +54,9 @@ import { MaterialsFormComponent } from './materials/materials-form/materials-for
             { path: 'materials', component: MaterialsComponent },
             { path: 'materials-add', component: MaterialsFormComponent },
             { path: 'materials-edit/:id', component: MaterialsFormComponent },
+            { path: 'items', component: ItemsComponent },
+            { path: 'items-add', component: ItemsFormComponent },
+            { path: 'items-edit/:id', component: ItemsFormComponent },
         ]),
         BrowserAnimationsModule,
         NgxLoadingModule.forRoot({})
