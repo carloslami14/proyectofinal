@@ -21,6 +21,7 @@ import { MaterialsComponent } from './materials/materials.component';
 import { MaterialsFormComponent } from './materials/materials-form/materials-form.component';
 import { ItemsComponent } from './items/items.component';
 import { ItemsFormComponent } from './items/items-form/items-form.component';
+import { CalculationComponent } from './calculation/calculation.component';
 
 @NgModule({
     declarations: [
