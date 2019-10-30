@@ -229,3 +229,13 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+
+
+appsettings.json
+
+*.suo
+*.user
+_ReSharper.*
+bin
+obj
+packages

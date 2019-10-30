@@ -1,0 +1,36 @@
+<div>
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">Familias</h3>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <a [routerLink]="['/families-add']" routerLinkActive="router-link-active" class="btn btn-sm btn-primary float-right">Agregar</a>
+    </div>
+    <div class="card-body">
+      <table class='table table-striped' *ngIf="families">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let family of families">
+            <td>{{ family.id }}</td>
+            <td>{{ family.name }}</td>
+            <td>
+              <div class="btn-group">
+                <button class="btn btn-danger btn-space" (click)="deleteFamily(family)">Eliminar</button>
+                <button class="btn btn-primary btn-space" [routerLink]="['/families-edit/' + family.id]">Modificar</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -9,7 +9,6 @@ namespace PF.Dominio.Model
         {
             Activities = new HashSet<Activity>();
         }
-        public int ConstructionId { get; set; }
         public string Nombre { get; set; }
         public double Cost { get; set; }
         public DateTime StartDate { get; set; }

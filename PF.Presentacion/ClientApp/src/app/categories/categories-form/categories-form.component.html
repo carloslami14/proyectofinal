@@ -1,0 +1,43 @@
+<h1>{{EditionMode ? 'Editar' : 'Agregar'}} Categoria</h1>
+<form class="form-horizontal" novalidate
+      (ngSubmit)="save()" [formGroup]="formGroup">
+  <fieldset>
+    <div class="form-group">
+      <label class="col-md-2 control-label">Nombre</label>
+      <div class="col-md-8">
+        <input class="form-control"
+               id="name"
+               type="text"
+               required
+               formControlName="name" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-2 control-label">Familia</label>
+      <div class="col-md-3 ">
+        <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="familyId" (change)="onSelectFamily($event.target.value)" style="width:150px;">
+          <option value="0">--Familias--</option>
+          <option *ngFor="let family of families" value={{family.id}}>{{family.name}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-md-4 col-md-offset-2">
+        <span>
+          <button class="btn btn-primary"
+                  type="submit"
+                  [disabled]="!formGroup.valid">
+            Guardar
+          </button>
+          <button class="btn"
+                  type="button"
+                  [routerLink]='["/categories"]'>
+            Cancelar
+          </button>
+        </span>
+      </div>
+    </div>
+  </fieldset>
+</form>
