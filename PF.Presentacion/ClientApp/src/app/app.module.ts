@@ -37,7 +37,8 @@ import { CalculationComponent } from './calculation/calculation.component';
         MaterialsComponent,
         MaterialsFormComponent,
         ItemsComponent,
-        ItemsFormComponent
+        ItemsFormComponent,
+        CalculationComponent
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
