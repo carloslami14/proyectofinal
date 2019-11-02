@@ -13,43 +13,34 @@
       </div>
     </div>
 
-    <div class="form-group">
-      <label class="col-md-2 control-label">Precio</label>
-      <div class="col-md-8">
-        <input class="form-control"
-               id="price"
-               type="number"
-               required
-               formControlName="price" />
+    <div class="row">
+      <div class="form-group">
+        <label class="col-md-2 control-label">Materiales</label>
+        <div class="col-md-3 ">
+          <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="materialId" (change)="onSelectMaterial($event.target.value)" style="width:150px;">
+            <option value="0">--Material--</option>
+            <option *ngFor="let material of materials" value={{material.id}}>{{material.name}}</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <button class="btn btn-primary" [disabled]="!materialId" type="button" (click)="addMaterial()">Agregar</button>
+        </div>
       </div>
     </div>
 
-    <!--<div class="form-group">
-      <label class="col-md-2 control-label">Unidad</label>
-      <div class="col-md-3 ">
-        <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="categoryId" (change)="onSelectUnit($event.target.value)" style="width:150px;">
-          <option value="0">--Unidades--</option>
-          <option *ngFor="let unit of units" value={{unit.id}}>{{unit.name}}</option>
-        </select>
-      </div>
-    </div>-->
-
-    <div class="form-group">
-      <label class="col-md-2 control-label">Categoria</label>
-      <div class="col-md-3 ">
-        <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="materialId" (change)="onSelectMaterial($event.target.value)" style="width:150px;">
-          <option value="0">--Material--</option>
-          <option *ngFor="let material of materials" value={{material.id}}>{{material.name}}</option>
-        </select>
+    <div class="row"> 
+      <div class="col-md-3">
+        <label class="control-label">Total</label>
       </div>
       <div class="col-md-3">
-        <button class="btn btn-primary btn-space" (click)="onSelectMaterial(material)"></button>
+        <input disabled value={{price}} />
       </div>
     </div>
 
 
+    <h5>Materiales Seleccionados</h5>
     <div>
-      <table>
+      <table class="table">
         <thead>
           <tr>
             <th>Id</th>
@@ -59,13 +50,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let material of materials">
+          <tr *ngFor="let material of selectedMaterials; let i = index">
             <td>{{ material.id }}</td>
             <td>{{ material.name }}</td>
             <td>{{ material.price }}</td>
             <td>
               <div class="btn-group">
-                <button class="btn btn-danger btn-space" (click)="deleteMaterial(material)">Eliminar</button>
+                <button class="btn btn-danger btn-space" type="button" (click)="removeMaterial(i)">Quitar</button>
               </div>
             </td>
           </tr>
@@ -83,7 +74,7 @@
           </button>
           <button class="btn"
                   type="button"
-                  [routerLink]='["/categories"]'>
+                  [routerLink]='["/items"]'>
             Cancelar
           </button>
         </span>

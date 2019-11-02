@@ -30,4 +30,8 @@ export class CategoriesService {
     deleteCategory(categoryId: string) {
         return this.http.delete<ICategory>(this.apiURL + '/' + categoryId);
     }
+
+    //getCategoriesByFamilyId(familyId: string): Observable<ICategory[]> {
+    //    return this.http.get<ICategory[]>(this.apiURL + '/GetCategoriesByFamilyId/' + familyId);
+    //}
 }

@@ -49,6 +49,11 @@ namespace PF.Persistencia.Repository
             return _context.Categories.Where(categories => categories.State == State.Enabled);
         }
 
+        public IEnumerable<Category> GetAllByCategoryId(int familyId)
+        {
+            return _context.Categories.Where(categories => categories.State == State.Enabled && categories.FamilyId == familyId);
+        }
+
         public void Save()
         {
             _context.SaveChanges();

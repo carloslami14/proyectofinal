@@ -23,7 +23,7 @@
           <tr *ngFor="let category of categories">
             <td>{{ category.id }}</td>
             <td>{{ category.name }}</td>
-            <td>{{ category.familyId }}</td>
+            <td>{{ category.family.name }}</td>
             <td>
               <div class="btn-group">
                 <button class="btn btn-danger btn-space" (click)="deleteCategory(category)">Eliminar</button>

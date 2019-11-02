@@ -27,6 +27,7 @@
             <td>
               <div class="btn-group">
                 <button class="btn btn-danger btn-space" (click)="deleteItem(item)">Eliminar</button>
+                <button class="btn btn-danger btn-space" (click)="detailsItem(item)">Detalles</button>
                 <button class="btn btn-primary btn-space" [routerLink]="['/items-edit/' + item.id]">Modificar</button>
               </div>
             </td>

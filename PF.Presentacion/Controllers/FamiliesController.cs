@@ -7,8 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PF.Dominio.Interfaces.Model;
 using PF.Dominio.Model;
-using PF.Persistencia.Context;
-using PF.Persistencia.Repository;
 
 namespace PF.Presentacion.Controllers
 {

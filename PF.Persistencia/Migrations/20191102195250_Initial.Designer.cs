@@ -10,7 +10,7 @@ using PF.Persistencia.Context;
 namespace PF.Persistencia.Migrations
 {
     [DbContext(typeof(FinalProjectContext))]
-    [Migration("20191028203742_Initial")]
+    [Migration("20191102195250_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,7 +54,8 @@ namespace PF.Persistencia.Migrations
 
                     b.Property<DateTime>("ModificationDate");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasMaxLength(100);
 
                     b.Property<int>("State");
 
@@ -96,7 +97,8 @@ namespace PF.Persistencia.Migrations
 
                     b.Property<DateTime>("ModificationDate");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasMaxLength(100);
 
                     b.Property<int>("State");
 
@@ -113,11 +115,10 @@ namespace PF.Persistencia.Migrations
 
                     b.Property<int?>("ActivityId");
 
-                    b.Property<int?>("ItemId");
-
                     b.Property<DateTime>("ModificationDate");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasMaxLength(100);
 
                     b.Property<double>("Price");
 
@@ -127,9 +128,30 @@ namespace PF.Persistencia.Migrations
 
                     b.HasIndex("ActivityId");
 
+                    b.ToTable("Items");
+                });
+
+            modelBuilder.Entity("PF.Dominio.Model.ItemMaterial", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ItemId");
+
+                    b.Property<int>("MaterialId");
+
+                    b.Property<DateTime>("ModificationDate");
+
+                    b.Property<int>("State");
+
+                    b.HasKey("Id");
+
                     b.HasIndex("ItemId");
 
-                    b.ToTable("Items");
+                    b.HasIndex("MaterialId");
+
+                    b.ToTable("ItemsMaterials");
                 });
 
             modelBuilder.Entity("PF.Dominio.Model.Material", b =>
@@ -140,23 +162,22 @@ namespace PF.Persistencia.Migrations
 
                     b.Property<int>("CategoryId");
 
-                    b.Property<int?>("ItemId");
-
                     b.Property<DateTime>("ModificationDate");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasMaxLength(100);
 
                     b.Property<double>("Price");
 
                     b.Property<int>("State");
 
-                    b.Property<int>("Unit");
+                    b.Property<int>("UnitId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("ItemId");
+                    b.HasIndex("UnitId");
 
                     b.ToTable("Materials");
                 });
@@ -218,6 +239,27 @@ namespace PF.Persistencia.Migrations
                     b.ToTable("Roles");
                 });
 
+            modelBuilder.Entity("PF.Dominio.Model.Unit", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Abbreviation")
+                        .HasMaxLength(10);
+
+                    b.Property<DateTime>("ModificationDate");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(100);
+
+                    b.Property<int>("State");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Units");
+                });
+
             modelBuilder.Entity("PF.Dominio.Model.User", b =>
                 {
                     b.Property<int>("Id")
@@ -259,10 +301,19 @@ namespace PF.Persistencia.Migrations
                     b.HasOne("PF.Dominio.Model.Activity")
                         .WithMany("Items")
                         .HasForeignKey("ActivityId");
+                });
 
-                    b.HasOne("PF.Dominio.Model.Item")
+            modelBuilder.Entity("PF.Dominio.Model.ItemMaterial", b =>
+                {
+                    b.HasOne("PF.Dominio.Model.Item", "Item")
+                        .WithMany("Materials")
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("PF.Dominio.Model.Material", "Material")
                         .WithMany("Items")
-                        .HasForeignKey("ItemId");
+                        .HasForeignKey("MaterialId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("PF.Dominio.Model.Material", b =>
@@ -272,9 +323,10 @@ namespace PF.Persistencia.Migrations
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("PF.Dominio.Model.Item")
-                        .WithMany("Materials")
-                        .HasForeignKey("ItemId");
+                    b.HasOne("PF.Dominio.Model.Unit", "Unit")
+                        .WithMany()
+                        .HasForeignKey("UnitId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

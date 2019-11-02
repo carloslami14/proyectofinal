@@ -15,7 +15,7 @@
           <tr>
             <th>Id</th>
             <th>Nombre</th>
-            <th>Pricio</th>
+            <th>Precio</th>
             <th>Unidad</th>
             <th>Acciones</th>
           </tr>
@@ -25,7 +25,7 @@
             <td>{{ material.id }}</td>
             <td>{{ material.name }}</td>
             <td>{{ material.price }}</td>
-            <td>{{ material.unit }}</td>
+            <td>{{ material.unit.name }}</td>
             <td>
               <div class="btn-group">
                 <button class="btn btn-danger btn-space" (click)="deleteMaterial(material)">Eliminar</button>

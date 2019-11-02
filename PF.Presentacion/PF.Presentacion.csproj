@@ -15,6 +15,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="2.2.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.6" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
   </ItemGroup>
@@ -28,9 +29,10 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\categories\category.ts" />
-    <None Remove="ClientApp\src\app\enums\unit.ts" />
     <None Remove="ClientApp\src\app\items\item.ts" />
+    <None Remove="ClientApp\src\app\materials\itemMaterial.ts" />
     <None Remove="ClientApp\src\app\materials\material.ts" />
+    <None Remove="ClientApp\src\app\units\unit.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,9 +42,10 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\categories\category.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\enums\unit.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\items\item.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\materials\itemMaterial.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\materials\material.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\units\unit.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

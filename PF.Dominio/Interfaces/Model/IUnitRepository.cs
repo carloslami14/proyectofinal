@@ -5,8 +5,7 @@ using System.Text;
 
 namespace PF.Dominio.Interfaces.Model
 {
-    public interface ICategoryRepository: IGenericRepository<Category>
+    public interface IUnitRepository: IGenericRepository<Unit>
     {
-        IEnumerable<Category> GetAllByCategoryId(int familyId);
     }
 }

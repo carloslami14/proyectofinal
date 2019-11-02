@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PF.Dominio.Interfaces.Model;
 using PF.Dominio.Model;
-using PF.Persistencia.Context;
 
 namespace PF.Presentacion.Controllers
 {
@@ -27,6 +26,13 @@ namespace PF.Presentacion.Controllers
         public ActionResult<IEnumerable<Category>> GetCategories()
         {
             return _categoryRepository.GetAll().ToList();
+        }
+
+        // GET: api/Categories/5
+        [HttpGet("{id}")]
+        public ActionResult<IEnumerable<Category>> GetCategoriesByFamilyId(int id)
+        {
+            return _categoryRepository.GetAllByCategoryId(id).ToList();
         }
 
         // GET: api/Categories/5
@@ -52,7 +58,7 @@ namespace PF.Presentacion.Controllers
                 return BadRequest();
             }
 
-            _categoryRepository.Add(category);
+            _categoryRepository.Edit(category);
 
             try
             {

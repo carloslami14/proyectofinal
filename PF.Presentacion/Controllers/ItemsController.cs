@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PF.Dominio.Interfaces.Model;
 using PF.Dominio.Model;
+using PF.Presentacion.ViewModels;
 
 namespace PF.Presentacion.Controllers
 {
@@ -15,24 +16,27 @@ namespace PF.Presentacion.Controllers
     public class ItemsController : ControllerBase
     {
         private readonly IItemRepository _itemRepository;
+        private readonly IItemMaterialRepository _itemMaterialRepository;
 
-        public ItemsController(IItemRepository itemRepository)
+        public ItemsController(IItemRepository itemRepository,
+            IItemMaterialRepository itemMaterialRepository)
         {
             _itemRepository = itemRepository;
+            _itemMaterialRepository = itemMaterialRepository;
         }
 
         // GET: api/Items
         [HttpGet]
-        public IEnumerable<Item> GetItems()
+        public IEnumerable<ItemModel> GetItems()
         {
-            return _itemRepository.GetAll().ToList();
+            return _itemRepository.GetAll().ToList().Select(i => new ItemModel(i));
         }
 
         // GET: api/Items/5
         [HttpGet("{id}")]
-        public ActionResult<Item> GetItem(int id)
+        public ActionResult<ItemModel> GetItem(int id)
         {
-            var item = _itemRepository.GetById(id);
+            var item = new ItemModel(_itemRepository.GetById(id));
 
             if (item == null)
             {
@@ -74,10 +78,18 @@ namespace PF.Presentacion.Controllers
 
         // POST: api/Items
         [HttpPost]
-        public ActionResult<Item> PostItem(Item item)
+        public ActionResult<Item> PostItem(ItemModel model)
         {
+            var item = model.CreateItem();
             _itemRepository.Add(item);
             _itemRepository.Save();
+
+            var itemMaterial = model.GetItemsMaterials(item.Id);
+            foreach(var im in itemMaterial)
+            {
+                _itemMaterialRepository.Add(im);
+            }
+            _itemMaterialRepository.Save();
 
             return CreatedAtAction("GetItem", new { id = item.Id }, item);
         }
