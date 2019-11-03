@@ -1,67 +1,68 @@
-<!-- <header>
-  <nav class='navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3'>
+<header>
+  <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
     <div class="container">
-      <a class="navbar-brand" [routerLink]='["/"]'>Sistema Gestor de Obras</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-label="Toggle navigation"
-        [attr.aria-expanded]="isExpanded" (click)="toggle()">
+      <a class="navbar-brand" [routerLink]="['/']">Gestor de Proyectos</a>
+      <button class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target=".navbar-collapse"
+              aria-label="Toggle navigation"
+              [attr.aria-expanded]="isExpanded"
+              (click)="toggle()">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" [ngClass]='{"show": isExpanded}'>
+      <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"
+           [ngClass]="{ show: isExpanded }">
         <ul class="navbar-nav flex-grow">
-          <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
-            <a class="nav-link text-dark" [routerLink]='["/"]'>Home</a>
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/families']">Familia</a>
           </li>
-          <li class="nav-item" [routerLinkActive]='["link-active"]'>
-            <a class="nav-link text-dark" [routerLink]='["/counter"]'>Counter</a>
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/categories']">Categoria</a>
           </li>
-          <li class="nav-item" [routerLinkActive]='["link-active"]'>
-            <a class="nav-link text-dark" [routerLink]='["/fetch-data"]'>Fetch data</a>
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/materials']">Materiales</a>
           </li>
-          <li class="nav-item dropdown" dropdown>
-            <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-            Basic dropdown<span class="caret"></span></a>
-            <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-                <a class="dropdown-item waves-light" mdbWavesEffect href="#">Action</a>
-                <a class="dropdown-item waves-light" mdbWavesEffect href="#">Another action</a>
-                <a class="dropdown-item waves-light" mdbWavesEffect href="#">Something else here</a>
-                <div class="divider dropdown-divider"></div>
-                <a class="dropdown-item waves-light" mdbWavesEffect href="#">Separated link</a>
-            </div>
-        </li>
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/items']">Items</a>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
-</header> -->
+</header>
+
+<!--
 <div>
-    <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
-      <a class="navbar-brand" [routerLink]='["/"]'>Sistema Gestor de Obras</a>
-      
-      <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-label="Toggle navigation"
-        [attr.aria-expanded]="isExpanded" (click)="toggle()">
-        <span class="navbar-toggler-icon"></span>
-      </button> -->
-      
-      <div class="collapse navbar-collapse xnavbar-nav xnav">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link nav-link" [routerLink]="['/']" routerLinkActive="['link-active']">Home</a>
-          </li>
+  <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+    <a class="navbar-brand" [routerLink]='["/"]'>Sistema Gestor de Obras</a>
 
-          <li class="nav-item">
-            <a class="nav-link nav-link" [routerLink]="['/families']" routerLinkActive="['link-active']">Familias</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link nav-link" [routerLink]="['/categories']" routerLinkActive="['link-active']">Categorias</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link nav-link" [routerLink]="['/materials']" routerLinkActive="['link-active']">Materiales</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link nav-link" [routerLink]="['/items']" routerLinkActive="['link-active']">Items</a>
-          </li>
-        </ul>  
-      </div>   
-      </div>
-    </div>
+    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-label="Toggle navigation"
+      [attr.aria-expanded]="isExpanded" (click)="toggle()">
+      <span class="navbar-toggler-icon"></span>
+    </button> 
 
+<div class="collapse navbar-collapse xnavbar-nav xnav">
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item">
+      <a class="nav-link nav-link" [routerLink]="['/']" routerLinkActive="['link-active']">Home</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link nav-link" [routerLink]="['/families']" routerLinkActive="['link-active']">Familias</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link nav-link" [routerLink]="['/categories']" routerLinkActive="['link-active']">Categorias</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link nav-link" [routerLink]="['/materials']" routerLinkActive="['link-active']">Materiales</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link nav-link" [routerLink]="['/items']" routerLinkActive="['link-active']">Items</a>
+    </li>
+  </ul>
+</div>
+  </div>
+</div>
+
+-->
