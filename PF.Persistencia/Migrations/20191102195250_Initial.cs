@@ -34,7 +34,7 @@ namespace PF.Persistencia.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ModificationDate = table.Column<DateTime>(nullable: false),
                     State = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(maxLength: 100, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -90,6 +90,22 @@ namespace PF.Persistencia.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Units",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ModificationDate = table.Column<DateTime>(nullable: false),
+                    State = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(maxLength: 100, nullable: true),
+                    Abbreviation = table.Column<string>(maxLength: 10, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Units", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -137,7 +153,7 @@ namespace PF.Persistencia.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ModificationDate = table.Column<DateTime>(nullable: false),
                     State = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(maxLength: 100, nullable: true),
                     FamilyId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -159,10 +175,9 @@ namespace PF.Persistencia.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ModificationDate = table.Column<DateTime>(nullable: false),
                     State = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(maxLength: 100, nullable: true),
                     Price = table.Column<double>(nullable: false),
-                    ActivityId = table.Column<int>(nullable: true),
-                    ItemId = table.Column<int>(nullable: true)
+                    ActivityId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -171,12 +186,6 @@ namespace PF.Persistencia.Migrations
                         name: "FK_Items_Activities_ActivityId",
                         column: x => x.ActivityId,
                         principalTable: "Activities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Items_Items_ItemId",
-                        column: x => x.ItemId,
-                        principalTable: "Items",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -189,11 +198,10 @@ namespace PF.Persistencia.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ModificationDate = table.Column<DateTime>(nullable: false),
                     State = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(maxLength: 100, nullable: true),
                     Price = table.Column<double>(nullable: false),
-                    Unit = table.Column<int>(nullable: false),
-                    CategoryId = table.Column<int>(nullable: false),
-                    ItemId = table.Column<int>(nullable: true)
+                    UnitId = table.Column<int>(nullable: false),
+                    CategoryId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -205,11 +213,39 @@ namespace PF.Persistencia.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Materials_Items_ItemId",
+                        name: "FK_Materials_Units_UnitId",
+                        column: x => x.UnitId,
+                        principalTable: "Units",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ItemsMaterials",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ModificationDate = table.Column<DateTime>(nullable: false),
+                    State = table.Column<int>(nullable: false),
+                    ItemId = table.Column<int>(nullable: false),
+                    MaterialId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ItemsMaterials", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ItemsMaterials_Items_ItemId",
                         column: x => x.ItemId,
                         principalTable: "Items",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ItemsMaterials_Materials_MaterialId",
+                        column: x => x.MaterialId,
+                        principalTable: "Materials",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -228,9 +264,14 @@ namespace PF.Persistencia.Migrations
                 column: "ActivityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Items_ItemId",
-                table: "Items",
+                name: "IX_ItemsMaterials_ItemId",
+                table: "ItemsMaterials",
                 column: "ItemId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ItemsMaterials_MaterialId",
+                table: "ItemsMaterials",
+                column: "MaterialId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Materials_CategoryId",
@@ -238,15 +279,15 @@ namespace PF.Persistencia.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Materials_ItemId",
+                name: "IX_Materials_UnitId",
                 table: "Materials",
-                column: "ItemId");
+                column: "UnitId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Materials");
+                name: "ItemsMaterials");
 
             migrationBuilder.DropTable(
                 name: "Permissions");
@@ -261,19 +302,25 @@ namespace PF.Persistencia.Migrations
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Categories");
-
-            migrationBuilder.DropTable(
                 name: "Items");
 
             migrationBuilder.DropTable(
-                name: "Families");
+                name: "Materials");
 
             migrationBuilder.DropTable(
                 name: "Activities");
 
             migrationBuilder.DropTable(
+                name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "Units");
+
+            migrationBuilder.DropTable(
                 name: "Constructions");
+
+            migrationBuilder.DropTable(
+                name: "Families");
         }
     }
 }

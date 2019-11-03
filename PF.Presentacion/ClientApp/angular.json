@@ -24,7 +24,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/css/bootstrap.superhero.min.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
             "scripts": []

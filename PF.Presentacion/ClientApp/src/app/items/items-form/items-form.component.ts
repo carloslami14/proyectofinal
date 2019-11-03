@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { IMaterial } from '../../materials/material';
 import { IItem } from '../item';
+import { IItemMaterial } from '../../materials/itemMaterial';
 
 @Component({
     selector: 'app-items-form',
@@ -18,7 +19,9 @@ export class ItemsFormComponent implements OnInit {
     editionMode: boolean = false;
     itemId: number;
     materials: IMaterial[] = [];
+    selectedMaterials: IMaterial[] = [];
     materialId: number;
+    price: number = 0;
 
     constructor(private itemsServices: ItemsService,
         private materialsServices: MaterialsService,
@@ -54,22 +57,34 @@ export class ItemsFormComponent implements OnInit {
     loadForm(item: IItem) {
         this.formGroup.patchValue({
             name: item.name,
-            price: item.price,
         });
+        this.price = item.price;
+        this.selectedMaterials = item.materials;
     }
 
     onSelectMaterial(materialId: number) {
         this.materialId = materialId;
     }
 
-    deleteMaterial(material) {
-        this.materials = this.materials.filter(mt => mt !== material);
+    removeMaterial(i: number) {
+        this.price -= this.selectedMaterials[i].price;
+        this.selectedMaterials.splice(i, 1);
+    }
+
+    addMaterial() {
+        if (this.materialId > 0) {
+            let m = this.materials.find(m => m.id == this.materialId);
+            this.selectedMaterials.push(m);
+            this.price += m.price;
+        }
     }
 
     save() {
         // Get data of form
         let item: IItem = Object.assign({}, this.formGroup.value);
-        item.materials = this.materials;
+        let itemMaterials: IItemMaterial[] = [];
+        item.materials = this.selectedMaterials;
+        item.price = this.price;
 
         if (this.editionMode) {
             // Edit Item

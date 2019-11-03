@@ -50,4 +50,12 @@ export class ItemsComponent implements OnInit {
             .subscribe(items => this.items = items,
                 error => console.error(error));
     }
+
+    detailsItem(item: IItem) {
+        Swal.fire(
+            'Show item details',
+            'Este item ha sido eliminado',
+            'success'
+        )
+    }
 }

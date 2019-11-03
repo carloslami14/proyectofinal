@@ -18,7 +18,7 @@ namespace PF.Presentacion
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-          
+
         }
 
         public IConfiguration Configuration { get; }
@@ -26,13 +26,22 @@ namespace PF.Presentacion
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Dependency Injection
+            #region Dependency Injection
             services.AddTransient<IFamilyRepository, FamilyRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IMaterialRepository, MaterialRepository>();
             services.AddTransient<IItemRepository, ItemRepository>();
-            
+            services.AddTransient<IUnitRepository, UnitRepository>();
+            services.AddTransient<IItemMaterialRepository, ItemMaterialRepository>();
+            #endregion
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            
+            // To ignore cycles that it finds in the object
+            services.AddMvc()
+                .AddJsonOptions(
+                options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -40,11 +49,14 @@ namespace PF.Presentacion
                 configuration.RootPath = "ClientApp/dist";
             });
 
+
+            #region Connections String
             // MySql
             //services.AddDbContext<FinalProjectContext>(option => option.UseMySQL(Configuration.GetConnectionString("MySqlConnection")));
 
             // Sql Server
             services.AddDbContext<FinalProjectContext>(option => option.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection")));
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -81,6 +93,7 @@ namespace PF.Presentacion
 
                 if (env.IsDevelopment())
                 {
+                    spa.Options.StartupTimeout = new TimeSpan(0, 0, 130);
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });

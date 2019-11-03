@@ -1,93 +1,92 @@
-<h1>{{EditionMode ? 'Editar' : 'Agregar'}} Item</h1>
-<form class="form-horizontal" novalidate
-      (ngSubmit)="save()" [formGroup]="formGroup">
-  <fieldset>
-    <div class="form-group">
-      <label class="col-md-2 control-label">Nombre</label>
-      <div class="col-md-8">
-        <input class="form-control"
-               id="name"
-               type="text"
-               required
-               formControlName="name" />
-      </div>
-    </div>
+<div class="card">
+  <div class="card-header">
+    <h3>{{EditionMode ? 'Editar' : 'Agregar'}} Item</h3>
+  </div>
 
-    <div class="form-group">
-      <label class="col-md-2 control-label">Precio</label>
-      <div class="col-md-8">
-        <input class="form-control"
-               id="price"
-               type="number"
-               required
-               formControlName="price" />
-      </div>
-    </div>
+  <div class="card-body">
+    <form class="form-horizontal" novalidate
+          (ngSubmit)="save()" [formGroup]="formGroup">
+      <fieldset>
+        <div class="form-group">
+          <label class="col-md-2 control-label">Nombre</label>
+          <div class="col-md-12">
+            <input class="form-control"
+                   id="name"
+                   type="text"
+                   required
+                   formControlName="name" />
+          </div>
+        </div>
 
-    <!--<div class="form-group">
-      <label class="col-md-2 control-label">Unidad</label>
-      <div class="col-md-3 ">
-        <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="categoryId" (change)="onSelectUnit($event.target.value)" style="width:150px;">
-          <option value="0">--Unidades--</option>
-          <option *ngFor="let unit of units" value={{unit.id}}>{{unit.name}}</option>
-        </select>
-      </div>
-    </div>-->
+        <div class="row">
+          <div class="col-md-6">
+            <label class="col-md-4 control-label">Materiales</label>
+            <div class="col-md-12">
+              <select class="form-control col-md-12" [ngModelOptions]="{standalone: true}" [(ngModel)]="materialId" (change)="onSelectMaterial($event.target.value)">
+                <option value="0">--Material--</option>
+                <option *ngFor="let material of materials" value={{material.id}}>{{material.name}}</option>
+              </select>
+            </div>
+          </div>
 
-    <div class="form-group">
-      <label class="col-md-2 control-label">Categoria</label>
-      <div class="col-md-3 ">
-        <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="materialId" (change)="onSelectMaterial($event.target.value)" style="width:150px;">
-          <option value="0">--Material--</option>
-          <option *ngFor="let material of materials" value={{material.id}}>{{material.name}}</option>
-        </select>
-      </div>
-      <div class="col-md-3">
-        <button class="btn btn-primary btn-space" (click)="onSelectMaterial(material)"></button>
-      </div>
-    </div>
+          <div class="col-md-4">
+            <button class="btn btn-primary" [disabled]="!materialId" type="button" (click)="addMaterial()">Agregar</button>
+          </div>
+        </div>
 
+        <br />
 
-    <div>
-      <table>
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let material of materials">
-            <td>{{ material.id }}</td>
-            <td>{{ material.name }}</td>
-            <td>{{ material.price }}</td>
-            <td>
-              <div class="btn-group">
-                <button class="btn btn-danger btn-space" (click)="deleteMaterial(material)">Eliminar</button>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+        <div class="">
+          <label class="col-md-4 control-label">Materiales Seleccionados</label>
+          <div class="col-md-12">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Nombre</th>
+                  <th>Precio</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let material of selectedMaterials; let i = index">
+                  <td>{{ material.id }}</td>
+                  <td>{{ material.name }}</td>
+                  <td>{{ material.price }}</td>
+                  <td>
+                    <div class="btn-group">
+                      <button class="btn btn-danger btn-space" type="button" (click)="removeMaterial(i)">Quitar</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr *ngIf="price">
+                  <td></td>
+                  <th>Total</th>
+                  <th>${{price}}</th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-    <div class="form-group">
-      <div class="col-md-4 col-md-offset-2">
-        <span>
-          <button class="btn btn-primary"
-                  type="submit"
-                  [disabled]="!formGroup.valid">
-            Guardar
-          </button>
-          <button class="btn"
-                  type="button"
-                  [routerLink]='["/categories"]'>
-            Cancelar
-          </button>
-        </span>
-      </div>
-    </div>
-  </fieldset>
-</form>
+        <div class="form-group">
+          <div class="col-md-4 col-md-offset-2">
+            <span>
+              <button class="btn btn-primary  btn-space"
+                      type="submit"
+                      [disabled]="!formGroup.valid">
+                Guardar
+              </button>
+              <button class="btn btn-secondary btn-space"
+                      type="button"
+                      [routerLink]='["/items"]'>
+                Cancelar
+              </button>
+            </span>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+
+  </div>
+</div>

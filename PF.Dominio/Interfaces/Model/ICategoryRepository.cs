@@ -7,5 +7,6 @@ namespace PF.Dominio.Interfaces.Model
 {
     public interface ICategoryRepository: IGenericRepository<Category>
     {
+        IEnumerable<Category> GetAllByCategoryId(int familyId);
     }
 }

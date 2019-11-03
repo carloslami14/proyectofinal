@@ -1,17 +1,20 @@
-body {
-    padding-top: 92px;
-    height: 100%;
+/* You can add global styles to this file, and also import other style files */
+
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
 }
 
-.body-content{
-    padding-left: 15px;
-    padding-right: 15px;
+code {
+  color: #e01a76;
 }
 
-.applicationHost{
-    min-height: 100%;
-    height: auto;
-    height: 100%;
-    margin: 0 auto -60px;
-    padding: 0 0 90px; 
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.btn-space {
+  margin-right: 5px;
 }

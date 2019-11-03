@@ -2,16 +2,21 @@ using System.Collections.Generic;
 
 namespace PF.Dominio.Model
 {
-    public class Item: Base
+    public class Item : Base
     {
+        #region Constructor
         public Item()
         {
-            Materials = new HashSet<Material>();
-            Items = new HashSet<Item>();
+            Materials = new HashSet<ItemMaterial>();
+            //Items = new HashSet<ItemItem>();
         }
+        #endregion
+
+        #region Properties
         public string Name { get; set; }
         public double Price { get; set; }
-        public virtual ICollection<Material> Materials { get; set; }
-        public virtual ICollection<Item> Items { get; set; }
+        public virtual ICollection<ItemMaterial> Materials { get; set; }
+        //public virtual ICollection<ItemItem> Items { get; set; }
+        #endregion
     }
 }
