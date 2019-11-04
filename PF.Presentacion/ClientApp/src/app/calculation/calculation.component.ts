@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IItem } from '../items/item';
+import { ItemsService } from '../items/items.service';
 
 @Component({
   selector: 'app-calculation',
@@ -7,7 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalculationComponent implements OnInit {
 
-  constructor() { }
+  items: IItem[] = [];
+
+
+  constructor(private itemsService: ItemsService) {
+    itemsService.getItems()
+      .subscribe(items => this.items = items,
+        error => console.error(error));
+  }
 
   ngOnInit() {
   }

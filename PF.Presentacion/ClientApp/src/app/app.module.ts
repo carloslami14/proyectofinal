@@ -41,7 +41,7 @@ import { CalculationComponent } from './calculation/calculation.component';
         ItemsComponent,
         ItemsFormComponent,
         ProjectsComponent,
-        ProjectsFormComponent
+        ProjectsFormComponent,
         ItemsFormComponent,
         CalculationComponent
     ],
@@ -67,6 +67,7 @@ import { CalculationComponent } from './calculation/calculation.component';
             { path: 'projects', component: ProjectsComponent },
             { path: 'projects-add', component: ProjectsFormComponent },
             { path: 'projects-edit/:id', component: ProjectsFormComponent },
+            { path: 'calculation', component: CalculationComponent },
         ]),
         BrowserAnimationsModule,
         NgxLoadingModule.forRoot({})

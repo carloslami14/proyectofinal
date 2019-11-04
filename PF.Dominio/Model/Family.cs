@@ -1,6 +1,6 @@
 namespace PF.Dominio.Model
 {
-    public class Family: Base
+    public class Family : Base
     {
         #region Properties
         public string Name { get; set; }
