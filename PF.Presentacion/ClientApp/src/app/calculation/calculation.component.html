@@ -10,42 +10,45 @@
     <div class="row">
       <label class="col-md-2 control-label">Agregar Item</label>
       <div class="col-md-4">
-        <select class="form-control" (change)="onSelectItem($event.target.value)">
+        <select class="form-control" [(ngModel)]="itemId">
           <option value="0">--Items--</option>
           <option *ngFor="let item of items" value={{item.id}}>{{item.name}}</option>
         </select>
       </div>
       <div class="col-md-4">
         <input class="form-control"
+               [(ngModel)]="quantity"
                id="quality"
                type="text"
                required />
       </div>
       <div class="col-md-2">
         <button class="btn btn-secondary btn-space"
-                type="button">
+                type="button"
+                (click)="onSelectItem()">
           Agregar
         </button>
       </div>
     </div>
-    <div class="table-section">
-      <table class="table table-striped" *ngIf="categories">
+
+    <div class="table-section ">
+      <table class="table table-striped" *ngIf="itemsDetalle">
         <thead>
           <tr>
             <th>Nombre</th>
             <th>Cantidad</th>
             <th>Costo Parcial</th>
-            <th>Costo Parcial</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let itemDetalle of itemsDetalle">
             <td>{{itemDetalle.item.name}}</td>
             <td>{{itemDetalle.quantity}}</td>
-            <td>{{itemDetalle.item.cost * itemDetalle.quantity}}</td>
+            <td>{{itemDetalle.item.price * itemDetalle.quantity}}</td>
             <td>
               <div class="btn-group">
-                <button class="btn btn-danger btn-space">Quitar</button>
+                <button class="btn btn-danger btn-space" (click)="quitarDeTabla(itemDetalle.itemId)">Quitar</button>
                 <button class="btn btn-primary btn-space">Modificiar</button>
                 <button class="btn btn-primary btn-space">Ver</button>
               </div>
