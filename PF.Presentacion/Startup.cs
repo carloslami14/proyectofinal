@@ -33,6 +33,7 @@ namespace PF.Presentacion
             services.AddTransient<IItemRepository, ItemRepository>();
             services.AddTransient<IUnitRepository, UnitRepository>();
             services.AddTransient<IItemMaterialRepository, ItemMaterialRepository>();
+            services.AddTransient<IConstructionRepository, ConstructionRepository>();
             #endregion
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

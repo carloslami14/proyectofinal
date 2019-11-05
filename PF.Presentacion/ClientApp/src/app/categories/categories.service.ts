@@ -7,7 +7,7 @@ import { ICategory } from './category';
   providedIn: 'root'
 })
 export class CategoriesService {
-    private apiURL = this.baseUrl + "api/Categories";
+  private apiURL = this.baseUrl + "api/Categories";
 
     constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) { }
 

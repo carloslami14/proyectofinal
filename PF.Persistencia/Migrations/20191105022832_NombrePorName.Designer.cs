@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PF.Persistencia.Context;
 
 namespace PF.Persistencia.Migrations
 {
     [DbContext(typeof(FinalProjectContext))]
-    partial class FinalProjectContextModelSnapshot : ModelSnapshot
+    [Migration("20191105022832_NombrePorName")]
+    partial class NombrePorName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -12,22 +12,42 @@ namespace PF.Presentacion.Controllers
     
     [Route("api/[controller]")]
     [ApiController]
-    public class ContructionController : ControllerBase
+    public class ConstructionController : ControllerBase
     {
-        private readonly IContructionRepository _contructionRepository;
+        private readonly IConstructionRepository _constructionRepository;
 
-        public ContructionController(IContructionRepository contructionRepository)
+        public ConstructionController(IConstructionRepository contructionRepository)
         {
-            _contructionRepository = contructionRepository;
+            _constructionRepository = contructionRepository;
+        }
+        // GET: api/Construction
+        [HttpGet]
+        public ActionResult<IEnumerable<Construction>> GetConstructions()
+        {
+            return _constructionRepository.GetAll().ToList();
         }
 
-        // Agregar contruction
-        // POST: api/Families
-        [HttpPost]
-        public ActionResult<Construction> PostFamily(Construction construction)
+
+        // GET: api/Construction/5
+        [HttpGet("{id}")]
+        public ActionResult<Construction> GetConstruction(int id)
         {
-            _contructionRepository.Add(construction);
-            _contructionRepository.Save();
+            var construction = _constructionRepository.GetById(id);
+
+            if (construction == null)
+            {
+                return NotFound();
+            }
+
+            return construction;
+        }
+        // Agregar contruction
+        // POST: api/Construction
+        [HttpPost]
+        public ActionResult<Construction> PostConstruction(Construction construction)
+        {
+            _constructionRepository.Add(construction);
+            _constructionRepository.Save();
 
             return CreatedAtAction("GetConstruction", new { id = construction.Id }, construction);
         }

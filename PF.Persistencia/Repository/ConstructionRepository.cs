@@ -5,15 +5,16 @@ using PF.Dominio.Model;
 using PF.Persistencia.Context;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace PF.Persistencia.Repository
 {
-    class ContructionRepository : IContructionRepository
+    public class ConstructionRepository : IConstructionRepository
     {
         private readonly FinalProjectContext _context;
 
-        public ContructionRepository(FinalProjectContext context)
+        public ConstructionRepository(FinalProjectContext context)
         {
             _context = context;
         }
@@ -37,12 +38,12 @@ namespace PF.Persistencia.Repository
 
         public IEnumerable<Construction> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Constructions.Where(construction => construction.State == State.Enabled);
         }
 
         public Construction GetById(int Id)
         {
-            throw new NotImplementedException();
+            return _context.Constructions.FirstOrDefault(fl => fl.Id == Id && fl.State == State.Enabled);
         }
 
         public void Save()

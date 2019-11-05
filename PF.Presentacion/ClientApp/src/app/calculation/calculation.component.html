@@ -12,7 +12,7 @@
       <div class="col-md-4">
         <select class="form-control" [(ngModel)]="itemId">
           <option value="0">--Items--</option>
-          <option *ngFor="let item of items" value={{item.id}}>{{item.name}}</option>
+          <option *ngFor="let item of items" value={{item.id}}>{{item.name}} $ {{item.price}}</option>
         </select>
       </div>
       <div class="col-md-4">
@@ -31,7 +31,7 @@
       </div>
     </div>
 
-    <div class="table-section ">
+    <div class="card-body ">
       <table class="table table-striped" *ngIf="itemsDetalle">
         <thead>
           <tr>
@@ -42,13 +42,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let itemDetalle of itemsDetalle">
+          <tr *ngFor="let itemDetalle of itemsDetalle,let indice=index">
             <td>{{itemDetalle.item.name}}</td>
             <td>{{itemDetalle.quantity}}</td>
             <td>{{itemDetalle.item.price * itemDetalle.quantity}}</td>
             <td>
               <div class="btn-group">
-                <button class="btn btn-danger btn-space" (click)="quitarDeTabla(itemDetalle.itemId)">Quitar</button>
+                <button class="btn btn-danger btn-space" (click)="quitarDeTabla(indice)">Quitar</button>
                 <button class="btn btn-primary btn-space">Modificiar</button>
                 <button class="btn btn-primary btn-space">Ver</button>
               </div>
@@ -56,6 +56,11 @@
           </tr>
         </tbody>
       </table>
+    </div>
+    <div class="card-body row justify-content-end">
+      <label class="control-label col-md-3">Total</label>
+      <label class="control-label col-md-3">$ {{total}}</label>
+      <button class="btn btn-primary btn-space col-md-3" (click)="update()">Guardar</button>
     </div>
   </div>
 </div>

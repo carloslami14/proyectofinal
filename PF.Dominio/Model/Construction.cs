@@ -13,7 +13,7 @@ namespace PF.Dominio.Model
         #endregion
 
         #region Properties
-        public string Nombre { get; set; }
+        public string Name { get; set; }
         public double Cost { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }

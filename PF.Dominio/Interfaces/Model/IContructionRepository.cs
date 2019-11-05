@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PF.Dominio.Interfaces.Model
 {
-    public interface IContructionRepository : IGenericRepository<Construction>
+    public interface IConstructionRepository : IGenericRepository<Construction>
     {
     }
 }

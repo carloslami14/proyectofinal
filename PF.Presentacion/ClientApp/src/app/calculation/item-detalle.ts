@@ -1,10 +1,11 @@
 import { IItem } from "../items/item";
-import { IContruction } from "./contruction";
+import { IConstruction } from "../construction/construction";
+
 
 export interface IItemDetalle {
   id?: number;
   contructionId?: number;
-  contruction?: IContruction;
+  contruction?: IConstruction;
   itemId: number;
   item: IItem;
   quantity: number;
