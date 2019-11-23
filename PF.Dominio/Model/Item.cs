@@ -9,6 +9,7 @@ namespace PF.Dominio.Model
         {
             Materials = new HashSet<ItemMaterial>();
             Activities = new HashSet<ItemActivity>();
+            Constructions = new HashSet<ItemConstruction>();
             //Items = new HashSet<ItemItem>();
         }
         #endregion
@@ -18,6 +19,7 @@ namespace PF.Dominio.Model
         public double Price { get; set; }
         public virtual ICollection<ItemMaterial> Materials { get; set; }
         public virtual ICollection<ItemActivity> Activities { get; set; }
+        public virtual ICollection<ItemConstruction> Constructions { get; set; }
         //public virtual ICollection<ItemItem> Items { get; set; }
         #endregion
     }

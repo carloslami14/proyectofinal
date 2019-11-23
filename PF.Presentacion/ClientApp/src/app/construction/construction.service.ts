@@ -2,6 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IConstruction } from './construction';
 import { Observable } from 'rxjs';
+import { IItemConstruction } from '../calculation/item-construction';
 
 @Injectable({
     providedIn: 'root'

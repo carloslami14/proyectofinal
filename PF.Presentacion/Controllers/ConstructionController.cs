@@ -10,16 +10,19 @@ using PF.Dominio.Model;
 
 namespace PF.Presentacion.Controllers
 {
-    
+
     [Route("api/[controller]")]
     [ApiController]
     public class ConstructionController : ControllerBase
     {
         private readonly IConstructionRepository _constructionRepository;
+        private readonly IItemConstructionRepository _itemConstructionRepository;
 
-        public ConstructionController(IConstructionRepository contructionRepository)
+        public ConstructionController(IConstructionRepository contructionRepository,
+            IItemConstructionRepository itemConstructionRepository)
         {
             _constructionRepository = contructionRepository;
+            _itemConstructionRepository = itemConstructionRepository;
         }
 
         // GET: api/Construction
@@ -43,7 +46,7 @@ namespace PF.Presentacion.Controllers
             return construction;
         }
 
-        // PUT: api/Categories/5
+        // PUT: api/Construction/5
         [HttpPut("{id}")]
         public ActionResult PutConstruction(int id, Construction construction)
         {
@@ -52,11 +55,85 @@ namespace PF.Presentacion.Controllers
                 return BadRequest();
             }
 
-            _constructionRepository.Edit(construction);
-
             try
             {
+                #region Edit Construction
+                var constructionEdited = new Construction()
+                {
+                    Id = id,
+                    Address = construction.Address,
+                    Cost = construction.Cost,
+                    CreatedDate = construction.CreatedDate,
+                    EndDate = construction.EndDate,
+                    StartDate = construction.StartDate,
+                    Name = construction.Name,
+                    Description = construction.Description,
+                    State = construction.State
+                };
+                _constructionRepository.Edit(constructionEdited);
                 _constructionRepository.Save();
+                #endregion
+
+                #region Edit or Add ItemsConstructions
+                var itemsConstructions = _itemConstructionRepository.GetItemConstructionsByConstructionId(id);
+                var itemsConstructionsByItemId = construction.Items.GroupBy(i => i.ItemId).ToList();
+
+                if (itemsConstructionsByItemId.Count() == 0)
+                {
+                    //Delete all items material
+                    foreach (var ic in itemsConstructions)
+                    {
+                        _itemConstructionRepository.Delete(ic);
+                    }
+                }
+                else
+                {
+                    foreach (var ic in itemsConstructionsByItemId)
+                    {
+                        var icAux = itemsConstructions.Where(ics => ics.ItemId == ic.Key).FirstOrDefault();
+                        if (icAux != null )
+                        {
+                            //Edit item construction
+                            var itemConstruction = new ItemConstruction()
+                            {
+                                ItemId = icAux.ItemId,
+                                ConstructionId = id,
+                                Quantity = ic.Sum(i => i.Quantity)
+                            };
+                            _itemConstructionRepository.Edit(itemConstruction);
+                        }
+                        else
+                        {
+                            //Create item construction
+                            var itemConstruction = new ItemConstruction()
+                            {
+                                ItemId = ic.Key,
+                                ConstructionId = id,
+                                Quantity = ic.Sum(i => i.Quantity)
+                            };
+                            _itemConstructionRepository.Add(itemConstruction);
+                        }
+                    }
+
+                    foreach (var ic in itemsConstructions)
+                    {
+                        //Delete items erased
+                        var icDelete = itemsConstructionsByItemId.Where(icc => icc.Key != ic.ItemId).FirstOrDefault();
+                        if (icDelete != null)
+                        {
+                            var itemConstruction = new ItemConstruction()
+                            {
+                                ItemId = icDelete.Key,
+                                ConstructionId = id,
+                                Quantity = icDelete.Sum(i => i.Quantity)
+                            };
+                            _itemConstructionRepository.Delete(itemConstruction);
+                        }
+                    }
+                }
+
+                _itemConstructionRepository.Save();
+                #endregion
             }
             catch (DbUpdateConcurrencyException)
             {

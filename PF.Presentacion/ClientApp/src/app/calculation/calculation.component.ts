@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IItem } from '../items/item';
 import { ItemsService } from '../items/items.service';
-import { IItemDetalle } from './item-detalle';
+import { IItemConstruction } from './item-construction';
 import { IConstruction } from '../construction/construction';
 import { ConstructionService } from '../construction/construction.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -14,12 +14,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CalculationComponent implements OnInit {
 
     items: IItem[] = [];
-    itemsDetail: IItemDetalle[] = [];
+    itemsContructions: IItemConstruction[] = [];
     itemId: number = 0;
     quantity: number = 1;
     total: number = 0;
     construction: IConstruction;
     constructionId: number = 0;
+    flag: boolean = true;
 
     constructor(private itemsServices: ItemsService,
         private constructionServices: ConstructionService,
@@ -45,36 +46,47 @@ export class CalculationComponent implements OnInit {
     }
 
     onSelectItem() {
-        let itemDetail: IItemDetalle;
+        let itemConstruction: IItemConstruction;
 
-        itemDetail = {
-            id: 0,
+        itemConstruction = {
             itemId: this.itemId,
             item: this.items.find(x => x.id == this.itemId),
+            constructionId: this.constructionId,
+            construction: this.construction,
             quantity: this.quantity,
         };
-        this.itemsDetail.push(itemDetail);
+
+        this.construction.items.push(itemConstruction);
         this.calcular();
     }
 
     deleteItem(index: number) {
-        this.itemsDetail.splice(index, 1);
+        this.construction.items.splice(index, 1);
         this.calcular();
     }
 
     calcular() {
-        this.total = this.itemsDetail.reduce((sum, value) => (sum + value.item.price * value.quantity), 0);
+        this.flag = !(this.construction.items.length > 0);
+        this.total = this.construction.items.reduce((sum, value) => (sum + value.item.price * value.quantity), 0);
     }
 
     createCalculation() {
-        let construction: IConstruction;
-        var array = this.itemsDetail;
-        array.forEach(function (element) {
-            element.item = undefined;
-        });
+        console.log(this.construction);
+        console.log(this.constructionId);
+        let construction = { ...this.construction }
 
-        //this.constructionService.createConstruction(construction)
-        //    .subscribe(() => console.log("Guardado"),
-        //        error => console.error(error));
+        construction.items.forEach(function (i) {
+            i.item = undefined;
+            i.construction = undefined;
+        });
+        construction.cost = this.total;
+
+        this.constructionServices.updateConstruction(construction)
+            .subscribe(() => this.onSaveSuccess(),
+                error => console.error(error));
+    }
+
+    onSaveSuccess() {
+        this.router.navigate(['/construction-detail/' + this.constructionId]);
     }
 }

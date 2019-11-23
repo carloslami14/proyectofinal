@@ -17,6 +17,9 @@ export class ConstructionFormComponent implements OnInit {
     editionMode: boolean = false;
     constructionId: number;
 
+    cost: number = 0;
+    createdDate: Date;
+
     constructor(private fb: FormBuilder,
         private router: Router,
         private activateRouter: ActivatedRoute,
@@ -55,6 +58,8 @@ export class ConstructionFormComponent implements OnInit {
             address: construction.address,
             description: construction.description
         });
+        this.cost = construction.cost;
+        this.createdDate = construction.createdDate;
     }
 
     save() {
@@ -63,6 +68,8 @@ export class ConstructionFormComponent implements OnInit {
 
         if (this.editionMode) {
             // Edit Construction
+            construction.cost = this.cost;
+            construction.createdDate = this.createdDate;
             construction.id = this.constructionId;
             this.constructionServices.updateConstruction(construction)
                 .subscribe(() => this.onSaveSuccess(),

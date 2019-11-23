@@ -26,6 +26,7 @@ import { CalculationComponent } from './calculation/calculation.component';
 import { ConstructionComponent } from './construction/construction.component';
 import { ConstructionFormComponent } from './construction/construction-form/construction-form.component';
 import { ConstructionDetailFormComponent } from './construction/construction-form/construction-form.component';
+import { ActivityComponent } from './activity/activity.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { ConstructionDetailFormComponent } from './construction/construction-for
         CalculationComponent,
         ConstructionComponent,
         ConstructionFormComponent,
-        ConstructionDetailFormComponent
+        ConstructionDetailFormComponent,
+        ActivityComponent
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -73,6 +75,7 @@ import { ConstructionDetailFormComponent } from './construction/construction-for
             { path: 'construction-add', component: ConstructionFormComponent },
             { path: 'construction-edit/:id', component: ConstructionFormComponent },
             { path: 'construction-detail/:id', component: ConstructionDetailFormComponent },
+            { path: 'activity-add', component: ActivityComponent },
         ]),
         BrowserAnimationsModule,
         NgxLoadingModule.forRoot({})

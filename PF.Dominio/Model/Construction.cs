@@ -8,7 +8,7 @@ namespace PF.Dominio.Model
         #region Constructor
         public Construction()
         {
-            ItemsDetalle = new HashSet<ItemDetalle>();
+            Items = new HashSet<ItemConstruction>();
             Activities = new HashSet<Activity>();
         }
         #endregion
@@ -21,7 +21,7 @@ namespace PF.Dominio.Model
         public DateTime CreatedDate { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public virtual ICollection<ItemDetalle> ItemsDetalle { get; set; }
+        public virtual ICollection<ItemConstruction> Items { get; set; }
         public virtual ICollection<Activity> Activities { get; set; }
         #endregion
     }

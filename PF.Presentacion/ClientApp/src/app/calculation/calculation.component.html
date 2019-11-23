@@ -31,8 +31,8 @@
       </div>
     </div>
 
-    <div class="card-body ">
-      <table class="table table-striped" *ngIf="itemsDetail.length">
+    <div class="card-body" *ngIf="construction">
+      <table class="table table-striped" *ngIf="construction.items.length">
         <thead>
           <tr>
             <th>Nombre</th>
@@ -43,7 +43,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let itemDetalle of itemsDetail,let i=index">
+          <tr *ngFor="let itemDetalle of construction.items,let i=index">
             <td>{{itemDetalle.item.name}}</td>
             <td>{{itemDetalle.item.price}}</td>
             <td>{{itemDetalle.quantity}}</td>
@@ -71,7 +71,7 @@
       <div class="col-md-4 col-md-offset-2">
         <span>
           <button class="btn btn-secondary btn-space" type="button" [routerLink]="['/construction-detail/' + constructionId]">Cancelar</button>
-          <button class="btn btn-primary btn-space" [disabled]="!itemsDetail.length" (click)="createCalculation()">Guardar</button>
+          <button class="btn btn-primary btn-space" [disabled]="flag" (click)="createCalculation()">Guardar</button>
         </span>
       </div>
     </div>

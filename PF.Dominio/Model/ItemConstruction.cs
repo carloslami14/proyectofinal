@@ -4,10 +4,10 @@ using System.Text;
 
 namespace PF.Dominio.Model
 {
-    public class ItemDetalle : Base
+    public class ItemConstruction : Base
     {
         #region Properties
-        public int ContructionId { get; set; }
+        public int ConstructionId { get; set; }
         public virtual Construction Construction { get; set; }
         public int ItemId { get; set; }
         public virtual Item Item { get; set; }

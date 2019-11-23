@@ -39,6 +39,7 @@ namespace PF.Persistencia.Context
             modelBuilder.ApplyConfiguration(new ActivityConfiguration());
             modelBuilder.ApplyConfiguration(new ConstructionConfiguration());
             modelBuilder.ApplyConfiguration(new ItemActivityConfiguration());
+            modelBuilder.ApplyConfiguration(new ItemConstructionConfiguration()); // Remplace by ActivityItemCongiguration
             //modelBuilder.ApplyConfiguration(new ItemItemConfiguration());
             #endregion
         }
@@ -57,6 +58,7 @@ namespace PF.Persistencia.Context
         public DbSet<User> Users { get; set; }
         public DbSet<Unit> Units { get; set; }
         public DbSet<ItemMaterial> ItemsMaterials { get; set; }
+        public DbSet<ItemConstruction> ItemsConstructions { get; set; }
         #endregion
     }
 }

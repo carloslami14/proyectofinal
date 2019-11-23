@@ -1,8 +1,8 @@
-import { IItemDetalle } from "../calculation/item-detalle";
+import { IItemConstruction } from "../calculation/item-construction";
 
 export interface IConstruction {
-    id?: number;
-    name?: string;
+    id: number;
+    name: string;
     cost: number;
     address: string;
     description: string;
@@ -10,5 +10,5 @@ export interface IConstruction {
     createdDate: Date;
     modificationDate: Date;
     endDate?: Date;
-    itemsDetalle: IItemDetalle[];
+    items: IItemConstruction[];
 }
