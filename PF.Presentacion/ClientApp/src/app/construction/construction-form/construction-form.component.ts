@@ -15,13 +15,13 @@ export class ConstructionFormComponent implements OnInit {
     // Properties
     formGroup: FormGroup;
     editionMode: boolean = false;
-    constructionid: number;
+    constructionId: number;
 
     constructor(private fb: FormBuilder,
         private router: Router,
         private activateRouter: ActivatedRoute,
         private constructionServices: ConstructionService,
-        private datepipe: DatePipe) { }
+        public datepipe: DatePipe) { }
 
     ngOnInit() {
         this.formGroup = this.fb.group({
@@ -40,8 +40,8 @@ export class ConstructionFormComponent implements OnInit {
 
             //Edit Construction
             this.editionMode = true;
-            this.constructionid = params["id"];
-            this.constructionServices.getConstructionById(this.constructionid.toString())
+            this.constructionId = params["id"];
+            this.constructionServices.getConstructionById(this.constructionId.toString())
                 .subscribe(construction => this.loadForm(construction),
                     error => console.error(error));
         });
@@ -63,7 +63,7 @@ export class ConstructionFormComponent implements OnInit {
 
         if (this.editionMode) {
             // Edit Construction
-            construction.id = this.constructionid;
+            construction.id = this.constructionId;
             this.constructionServices.updateConstruction(construction)
                 .subscribe(() => this.onSaveSuccess(),
                     error => console.error(error));
@@ -89,7 +89,7 @@ export class ConstructionDetailFormComponent implements OnInit {
 
     // Properties
     formGroup: FormGroup;
-    constructionid: number;
+    constructionId: number;
     construction: IConstruction;
     constructionName: string;
 
@@ -97,7 +97,7 @@ export class ConstructionDetailFormComponent implements OnInit {
         private router: Router,
         private activateRouter: ActivatedRoute,
         private constructionServices: ConstructionService,
-        private datepipe: DatePipe) { }
+        public datepipe: DatePipe) { }
 
     ngOnInit() {
         this.formGroup = this.fb.group({
@@ -116,8 +116,8 @@ export class ConstructionDetailFormComponent implements OnInit {
             }
 
             //Edit construction
-            this.constructionid = params["id"];
-            this.constructionServices.getConstructionById(this.constructionid.toString())
+            this.constructionId = params["id"];
+            this.constructionServices.getConstructionById(this.constructionId.toString())
                 .subscribe(construction => this.loadForm(construction),
                     error => console.error(error));
         });

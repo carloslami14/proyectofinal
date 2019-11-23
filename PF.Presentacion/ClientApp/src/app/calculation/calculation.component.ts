@@ -4,72 +4,77 @@ import { ItemsService } from '../items/items.service';
 import { IItemDetalle } from './item-detalle';
 import { IConstruction } from '../construction/construction';
 import { ConstructionService } from '../construction/construction.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-calculation',
-  templateUrl: './calculation.component.html',
-  styleUrls: ['./calculation.component.css']
+    selector: 'app-calculation',
+    templateUrl: './calculation.component.html',
+    styleUrls: ['./calculation.component.css']
 })
 export class CalculationComponent implements OnInit {
 
-  items: IItem[] = [];
-  itemsDetalle: IItemDetalle[] = [];
-  itemId: number=0;
-  quantity: number = 1;
-  total: number = 0;
-  constructionId: number= 0;
+    items: IItem[] = [];
+    itemsDetail: IItemDetalle[] = [];
+    itemId: number = 0;
+    quantity: number = 1;
+    total: number = 0;
+    construction: IConstruction;
+    constructionId: number = 0;
 
-  constructor(private itemsService: ItemsService,
-    private constructionService: ConstructionService) {
-    itemsService.getItems()
-      .subscribe(items => this.items = items,
-        error => console.error(error));
-  }
-
-  ngOnInit() {
-  }
-
-  onSelectItem() {
-    let itemDetalle: IItemDetalle;
-
-    itemDetalle = {
-      id: 0,
-      itemId: this.itemId,
-      item: this.items.find(x => x.id == this.itemId),
-      quantity: this.quantity,
-    };
-    this.itemsDetalle.push(itemDetalle);
-    this.calcular();
+    constructor(private itemsServices: ItemsService,
+        private constructionServices: ConstructionService,
+        private router: Router,
+        private activateRouter: ActivatedRoute) {
+        itemsServices.getItems()
+            .subscribe(items => this.items = items,
+                error => console.error(error));
     }
 
-  deleteItem(index: number) {
-    this.itemsDetalle.splice(index, 1);
-    this.calcular();
-  }
+    ngOnInit() {
+        this.activateRouter.params.subscribe(params => {
+            if (params["id"] === undefined) {
+                return;
+            }
 
-  calcular() {
-    this.total = this.itemsDetalle.reduce((sum, value) => (sum + value.item.price * value.quantity), 0);
-  }
+            //Create calculation of construction
+            this.constructionId = params["id"];
+            this.constructionServices.getConstructionById(this.constructionId.toString())
+                .subscribe(construction => this.construction = construction,
+                    error => console.error(error));
+        });
+    }
 
-  update() {
-    let construction: IConstruction;
-    //Elimino los items para que no tener problemas al hacer el add de construction
-    var array = this.itemsDetalle;
-    array.forEach(function (element) {
-      element.item = undefined;
-    });
-   
-    construction = {
-      id: this.constructionId,
-      name: "prueba",
-      startDate: new Date(),
-      endDate: new Date(),
-      cost:this.total,
-      itemsDetalle:array,
-    };
+    onSelectItem() {
+        let itemDetail: IItemDetalle;
 
-    this.constructionService.createConstruction(construction)
-      .subscribe(() => console.log("Guardado"),
-        error => console.error(error));
-  }
+        itemDetail = {
+            id: 0,
+            itemId: this.itemId,
+            item: this.items.find(x => x.id == this.itemId),
+            quantity: this.quantity,
+        };
+        this.itemsDetail.push(itemDetail);
+        this.calcular();
+    }
+
+    deleteItem(index: number) {
+        this.itemsDetail.splice(index, 1);
+        this.calcular();
+    }
+
+    calcular() {
+        this.total = this.itemsDetail.reduce((sum, value) => (sum + value.item.price * value.quantity), 0);
+    }
+
+    createCalculation() {
+        let construction: IConstruction;
+        var array = this.itemsDetail;
+        array.forEach(function (element) {
+            element.item = undefined;
+        });
+
+        //this.constructionService.createConstruction(construction)
+        //    .subscribe(() => console.log("Guardado"),
+        //        error => console.error(error));
+    }
 }

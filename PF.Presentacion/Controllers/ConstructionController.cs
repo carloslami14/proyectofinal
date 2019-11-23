@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PF.Dominio.Interfaces.Model;
 using PF.Dominio.Model;
 
@@ -42,6 +43,36 @@ namespace PF.Presentacion.Controllers
             return construction;
         }
 
+        // PUT: api/Categories/5
+        [HttpPut("{id}")]
+        public ActionResult PutConstruction(int id, Construction construction)
+        {
+            if (id != construction.Id)
+            {
+                return BadRequest();
+            }
+
+            _constructionRepository.Edit(construction);
+
+            try
+            {
+                _constructionRepository.Save();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ConstructionExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
         // POST: api/Construction
         [HttpPost]
         public ActionResult<Construction> PostConstruction(Construction construction)
@@ -57,6 +88,11 @@ namespace PF.Presentacion.Controllers
             }
 
             return CreatedAtAction("GetConstruction", new { id = construction.Id }, construction);
+        }
+
+        private bool ConstructionExists(int id)
+        {
+            return _constructionRepository.GetById(id) != null;
         }
     }
 }

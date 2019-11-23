@@ -68,7 +68,7 @@ import { ConstructionDetailFormComponent } from './construction/construction-for
             { path: 'items', component: ItemsComponent },
             { path: 'items-add', component: ItemsFormComponent },
             { path: 'items-edit/:id', component: ItemsFormComponent },
-            { path: 'calculation', component: CalculationComponent },
+            { path: 'calculation/:id', component: CalculationComponent },
             { path: 'construction', component: ConstructionComponent },
             { path: 'construction-add', component: ConstructionFormComponent },
             { path: 'construction-edit/:id', component: ConstructionFormComponent },

@@ -19,6 +19,7 @@ namespace PF.Persistencia.Repository
         
         public void Add(Material entity)
         {
+            entity.ProviderId = 1;
             entity.ModificationDate = DateTime.Now;
             entity.State = State.Enabled;
             _context.Materials.Add(entity);
