@@ -1,4 +1,5 @@
-﻿using PF.Dominio.Model;
+﻿using PF.Dominio;
+using PF.Dominio.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +19,8 @@ namespace PF.Presentacion.ViewModels
             Id = item.Id;
             Name = item.Name;
             Price = item.Price;
-            ItemsMaterials = item.Materials;
-            Materials = item.Materials.Select(im => 
+            ItemsMaterials = item.Materials.Where(im => im.State == State.Enabled).ToList();
+            Materials = ItemsMaterials.Select(im => 
                 new Material() 
                 { 
                     Id = im.MaterialId,
@@ -38,7 +39,7 @@ namespace PF.Presentacion.ViewModels
         #endregion
 
         #region Methods
-        public Item CreateItem()
+        public Item GetItem()
         {
             return new Item()
             {

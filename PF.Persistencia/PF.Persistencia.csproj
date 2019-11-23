@@ -13,6 +13,16 @@
     <Compile Remove="Migrations\20191102191633_lsd.Designer.cs" />
     <Compile Remove="Migrations\20191102193319_dasd.cs" />
     <Compile Remove="Migrations\20191102193319_dasd.Designer.cs" />
+    <Compile Remove="Migrations\20191102195250_Initial.cs" />
+    <Compile Remove="Migrations\20191102195250_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20191103224815_second.cs" />
+    <Compile Remove="Migrations\20191103224815_second.Designer.cs" />
+    <Compile Remove="Migrations\20191105011110_correccion.cs" />
+    <Compile Remove="Migrations\20191105011110_correccion.Designer.cs" />
+    <Compile Remove="Migrations\20191105022832_NombrePorName.cs" />
+    <Compile Remove="Migrations\20191105022832_NombrePorName.Designer.cs" />
+    <Compile Remove="Migrations\20191122223938_IdItemMaterial.cs" />
+    <Compile Remove="Migrations\20191122223938_IdItemMaterial.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

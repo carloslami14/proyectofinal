@@ -18,10 +18,11 @@ export class ItemsFormComponent implements OnInit {
     formGroup: FormGroup;
     editionMode: boolean = false;
     itemId: number;
-    materials: IMaterial[] = [];
-    selectedMaterials: IMaterial[] = [];
+    materials: IItemMaterial[] = [];
+    materialsComboBox: IMaterial[] = [];
     materialId: number;
     price: number = 0;
+    quantity: number = 1;
 
     constructor(private itemsServices: ItemsService,
         private materialsServices: MaterialsService,
@@ -29,14 +30,15 @@ export class ItemsFormComponent implements OnInit {
         private activateRouter: ActivatedRoute,
         private fb: FormBuilder) {
         materialsServices.getMaterials()
-            .subscribe(materials => this.materials = materials,
+            .subscribe(materials => this.materialsComboBox = materials,
                 error => console.error(error));
     }
 
     ngOnInit() {
         this.formGroup = this.fb.group({
             name: '',
-            price: '0'
+            price: '0',
+            quantity: '1'
         });
 
         this.activateRouter.params.subscribe(params => {
@@ -57,9 +59,10 @@ export class ItemsFormComponent implements OnInit {
     loadForm(item: IItem) {
         this.formGroup.patchValue({
             name: item.name,
+            quantity: '1'
         });
         this.price = item.price;
-        this.selectedMaterials = item.materials;
+        this.materials = item.itemsMaterials;
     }
 
     onSelectMaterial(materialId: number) {
@@ -67,23 +70,35 @@ export class ItemsFormComponent implements OnInit {
     }
 
     removeMaterial(i: number) {
-        this.price -= this.selectedMaterials[i].price;
-        this.selectedMaterials.splice(i, 1);
+        this.materials.splice(i, 1);
+        this.calculateTotal();
     }
 
     addMaterial() {
         if (this.materialId > 0) {
-            let m = this.materials.find(m => m.id == this.materialId);
-            this.selectedMaterials.push(m);
-            this.price += m.price;
+            console.log(this.quantity);
+            let m = this.materialsComboBox.find(m => m.id == this.materialId);
+            let itemMaterial: IItemMaterial = {
+                materialId: m.id,
+                material: m,
+                quantity: (this.quantity === null || this.quantity === 0)  ? 1 : this.quantity,
+                itemId: 0,
+                item: null
+            }
+
+            this.materials.push(itemMaterial);
+            this.calculateTotal();
         }
+    }
+
+    calculateTotal() {
+        this.price = this.materials.reduce((sum, current) => sum + (current.quantity * current.material.price), 0);
     }
 
     save() {
         // Get data of form
         let item: IItem = Object.assign({}, this.formGroup.value);
-        let itemMaterials: IItemMaterial[] = [];
-        item.materials = this.selectedMaterials;
+        item.itemsMaterials = this.materials;
         item.price = this.price;
 
         if (this.editionMode) {

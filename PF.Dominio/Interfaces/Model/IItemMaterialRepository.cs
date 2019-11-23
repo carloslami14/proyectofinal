@@ -7,5 +7,6 @@ namespace PF.Dominio.Interfaces.Model
 {
     public interface IItemMaterialRepository: IGenericRepository<ItemMaterial>
     {
+        IEnumerable<ItemMaterial> GetItemMaterialsByItemId(int itemId);
     }
 }

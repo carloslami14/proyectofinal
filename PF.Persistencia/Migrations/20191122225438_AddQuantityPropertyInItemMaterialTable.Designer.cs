@@ -10,8 +10,8 @@ using PF.Persistencia.Context;
 namespace PF.Persistencia.Migrations
 {
     [DbContext(typeof(FinalProjectContext))]
-    [Migration("20191102195250_Initial")]
-    partial class Initial
+    [Migration("20191122225438_AddQuantityPropertyInItemMaterialTable")]
+    partial class AddQuantityPropertyInItemMaterialTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,8 +27,6 @@ namespace PF.Persistencia.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ConstructionId");
-
                     b.Property<double>("Cost");
 
                     b.Property<DateTime>("ModificationDate");
@@ -38,8 +36,6 @@ namespace PF.Persistencia.Migrations
                     b.Property<int>("State");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ConstructionId");
 
                     b.ToTable("Activities");
                 });
@@ -78,7 +74,7 @@ namespace PF.Persistencia.Migrations
 
                     b.Property<DateTime>("ModificationDate");
 
-                    b.Property<string>("Nombre");
+                    b.Property<string>("Name");
 
                     b.Property<DateTime>("StartDate");
 
@@ -131,23 +127,48 @@ namespace PF.Persistencia.Migrations
                     b.ToTable("Items");
                 });
 
-            modelBuilder.Entity("PF.Dominio.Model.ItemMaterial", b =>
+            modelBuilder.Entity("PF.Dominio.Model.ItemDetalle", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("ConstructionId");
+
+                    b.Property<int>("ContructionId");
+
                     b.Property<int>("ItemId");
 
-                    b.Property<int>("MaterialId");
-
                     b.Property<DateTime>("ModificationDate");
+
+                    b.Property<int>("Quantity");
 
                     b.Property<int>("State");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ConstructionId");
+
                     b.HasIndex("ItemId");
+
+                    b.ToTable("ItemDetalle");
+                });
+
+            modelBuilder.Entity("PF.Dominio.Model.ItemMaterial", b =>
+                {
+                    b.Property<int>("ItemId");
+
+                    b.Property<int>("MaterialId");
+
+                    b.Property<int>("Id");
+
+                    b.Property<DateTime>("ModificationDate");
+
+                    b.Property<int>("Quantity");
+
+                    b.Property<int>("State");
+
+                    b.HasKey("ItemId", "MaterialId");
 
                     b.HasIndex("MaterialId");
 
@@ -281,13 +302,6 @@ namespace PF.Persistencia.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("PF.Dominio.Model.Activity", b =>
-                {
-                    b.HasOne("PF.Dominio.Model.Construction")
-                        .WithMany("Activities")
-                        .HasForeignKey("ConstructionId");
-                });
-
             modelBuilder.Entity("PF.Dominio.Model.Category", b =>
                 {
                     b.HasOne("PF.Dominio.Model.Family", "Family")
@@ -301,6 +315,18 @@ namespace PF.Persistencia.Migrations
                     b.HasOne("PF.Dominio.Model.Activity")
                         .WithMany("Items")
                         .HasForeignKey("ActivityId");
+                });
+
+            modelBuilder.Entity("PF.Dominio.Model.ItemDetalle", b =>
+                {
+                    b.HasOne("PF.Dominio.Model.Construction", "Construction")
+                        .WithMany("ItemsDetalle")
+                        .HasForeignKey("ConstructionId");
+
+                    b.HasOne("PF.Dominio.Model.Item", "Item")
+                        .WithMany()
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("PF.Dominio.Model.ItemMaterial", b =>

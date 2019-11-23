@@ -10,8 +10,8 @@ using PF.Persistencia.Context;
 namespace PF.Persistencia.Migrations
 {
     [DbContext(typeof(FinalProjectContext))]
-    [Migration("20191105022832_NombrePorName")]
-    partial class NombrePorName
+    [Migration("20191122224402_Model")]
+    partial class Model
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -156,21 +156,17 @@ namespace PF.Persistencia.Migrations
 
             modelBuilder.Entity("PF.Dominio.Model.ItemMaterial", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
                     b.Property<int>("ItemId");
 
                     b.Property<int>("MaterialId");
+
+                    b.Property<int>("Id");
 
                     b.Property<DateTime>("ModificationDate");
 
                     b.Property<int>("State");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("ItemId");
+                    b.HasKey("ItemId", "MaterialId");
 
                     b.HasIndex("MaterialId");
 

@@ -48,18 +48,83 @@ namespace PF.Presentacion.Controllers
 
         // PUT: api/Items/5
         [HttpPut("{id}")]
-        public IActionResult PutItem(int id, Item item)
+        public IActionResult PutItem(int id, ItemModel model)
         {
-            if (id != item.Id)
+            if (id != model.Id)
             {
                 return BadRequest();
             }
 
-            _itemRepository.Edit(item);
-
             try
             {
+                #region Edit Item
+                //Edit item
+                var item = model.GetItem();
+                item.Id = id;
+                _itemRepository.Edit(item);
                 _itemRepository.Save();
+                #endregion
+
+                #region Edit Item Material
+                var itemsMaterials = _itemMaterialRepository.GetItemMaterialsByItemId(id);
+                var itemsMaterialsByMaterialId = model.ItemsMaterials.GroupBy(im => im.MaterialId).ToList();
+                
+                if (itemsMaterialsByMaterialId.Count() == 0)
+                {
+                    //Delete all items material
+                    foreach (var im in itemsMaterials)
+                    {
+                        _itemMaterialRepository.Delete(im);
+                    }
+                }
+                else
+                {
+                    foreach (var im in itemsMaterialsByMaterialId)
+                    {
+                        var imAux = itemsMaterials.Where(ims => ims.MaterialId == im.Key).FirstOrDefault();
+                        if (item != null)
+                        {
+                            //Edit item material
+                            var itemMaterial = new ItemMaterial()
+                            {
+                                ItemId = imAux.ItemId,
+                                MaterialId = imAux.MaterialId,
+                                Quantity = im.Sum(i => i.Quantity)
+                            };
+                            _itemMaterialRepository.Edit(itemMaterial);
+                        }
+                        else
+                        {
+                            //Create item material
+                            var itemMaterial = new ItemMaterial()
+                            {
+                                ItemId = item.Id,
+                                MaterialId = im.Key,
+                                Quantity = im.Sum(i => i.Quantity)
+                            };
+                            _itemMaterialRepository.Add(itemMaterial);
+                        }
+                    }
+
+                    foreach (var im in itemsMaterials)
+                    {
+                        //Delete items erased
+                        var imDelete = itemsMaterialsByMaterialId.Where(imm => imm.Key != im.MaterialId).FirstOrDefault();
+                        if (imDelete != null)
+                        {
+                            var itemMaterial = new ItemMaterial()
+                            {
+                                ItemId = item.Id,
+                                MaterialId = imDelete.Key,
+                                Quantity = imDelete.Sum(i => i.Quantity)
+                            };
+                            _itemMaterialRepository.Delete(itemMaterial);
+                        }
+                    }
+                }
+
+                _itemMaterialRepository.Save();
+                #endregion
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -80,14 +145,21 @@ namespace PF.Presentacion.Controllers
         [HttpPost]
         public ActionResult<Item> PostItem(ItemModel model)
         {
-            var item = model.CreateItem();
+            //Create new item and save it
+            var item = model.GetItem();
             _itemRepository.Add(item);
             _itemRepository.Save();
 
-            var itemMaterial = model.GetItemsMaterials(item.Id);
-            foreach(var im in itemMaterial)
+            //Create new ItemMaterial and save it
+            foreach(var im in model.ItemsMaterials.GroupBy(im => im.MaterialId))
             {
-                _itemMaterialRepository.Add(im);
+                var itemMaterial = new ItemMaterial()
+                {
+                    ItemId = item.Id,
+                    MaterialId = im.Key,
+                    Quantity = im.Sum( i=> i.Quantity)
+                };
+                _itemMaterialRepository.Add(itemMaterial);
             }
             _itemMaterialRepository.Save();
 

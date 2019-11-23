@@ -21,7 +21,7 @@ namespace PF.Persistencia.Repository
 
         public void Add(Construction entity)
         {
-            entity.ModificationDate = DateTime.Today;
+            entity.ModificationDate = DateTime.Now;
             entity.State = State.Enabled;
             _context.Constructions.Add(entity);
         }

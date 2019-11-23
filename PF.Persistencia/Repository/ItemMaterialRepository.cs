@@ -1,4 +1,5 @@
-﻿using PF.Dominio;
+﻿using Microsoft.EntityFrameworkCore;
+using PF.Dominio;
 using PF.Dominio.Interfaces.Model;
 using PF.Dominio.Model;
 using PF.Persistencia.Context;
@@ -18,23 +19,24 @@ namespace PF.Persistencia.Repository
         }
         public void Add(ItemMaterial entity)
         {
-            entity.ModificationDate = DateTime.Today;
+            entity.ModificationDate = DateTime.Now;
             entity.State = State.Enabled;
             _context.ItemsMaterials.Add(entity);
         }
 
         public void Delete(ItemMaterial entity)
         {
-            entity.ModificationDate = DateTime.Today;
+            entity.ModificationDate = DateTime.Now;
             entity.State = State.Removed;
             _context.Update(entity);
         }
 
         public void Edit(ItemMaterial entity)
         {
-            entity.ModificationDate = DateTime.Today;
+            entity.ModificationDate = DateTime.Now;
             entity.State = State.Enabled;
-            _context.Update(entity);
+            var entityToUpdate = _context.ItemsMaterials.Attach(entity);
+            entityToUpdate.State = EntityState.Modified;
         }
 
         public ItemMaterial GetById(int Id)
@@ -44,7 +46,12 @@ namespace PF.Persistencia.Repository
 
         public IEnumerable<ItemMaterial> GetAll()
         {
-            return _context.ItemsMaterials.Where(itemsMaterias => itemsMaterias.State == State.Enabled);
+            return _context.ItemsMaterials.Where(itemsMaterials => itemsMaterials.State == State.Enabled);
+        }
+
+        public IEnumerable<ItemMaterial> GetItemMaterialsByItemId(int itemId)
+        {
+            return _context.ItemsMaterials.Where(itemsMaterials => itemsMaterials.ItemId == itemId).AsNoTracking().ToList();
         }
 
         public void Save()

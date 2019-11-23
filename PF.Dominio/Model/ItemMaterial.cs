@@ -9,6 +9,7 @@ namespace PF.Dominio.Model
         #region Properties
         public int ItemId { get; set; }
         public int MaterialId { get; set; }
+        public int Quantity { get; set; }
         public virtual Item Item { get; set; }
         public virtual Material Material { get; set; }
         #endregion

@@ -19,18 +19,27 @@
         </div>
 
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <label class="col-md-4 control-label">Materiales</label>
             <div class="col-md-12">
               <select class="form-control col-md-12" [ngModelOptions]="{standalone: true}" [(ngModel)]="materialId" (change)="onSelectMaterial($event.target.value)">
                 <option value="0">--Material--</option>
-                <option *ngFor="let material of materials" value={{material.id}}>{{material.name}}</option>
+                <option *ngFor="let material of materialsComboBox" value={{material.id}}>{{material.name}}</option>
               </select>
             </div>
           </div>
 
           <div class="col-md-4">
-            <button class="btn btn-primary" [disabled]="!materialId" type="button" (click)="addMaterial()">Agregar</button>
+            <label class="col-md-4 control-label">Cantidad</label>
+            <div class="col-md-12">
+              <div class="form-group">
+                <input class="form-control" id="quantity" [(ngModel)]="quantity" type="number" required formControlName="quantity" />
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <button class="btn btn-primary" id="button_center" [disabled]="!materialId" type="button" (click)="addMaterial()">Agregar</button>
           </div>
         </div>
 
@@ -44,15 +53,17 @@
                 <tr>
                   <th>Id</th>
                   <th>Nombre</th>
+                  <th>Cantidad</th>
                   <th>Precio</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let material of selectedMaterials; let i = index">
-                  <td>{{ material.id }}</td>
-                  <td>{{ material.name }}</td>
-                  <td>{{ material.price }}</td>
+                <tr *ngFor="let material of materials; let i = index">
+                  <td>{{ material.material.id }}</td>
+                  <td>{{ material.material.name }}</td>
+                  <td>{{ material.quantity }}</td>
+                  <td>{{ material.material.price }}</td>
                   <td>
                     <div class="btn-group">
                       <button class="btn btn-danger btn-space" type="button" (click)="removeMaterial(i)">Quitar</button>
@@ -61,8 +72,10 @@
                 </tr>
                 <tr *ngIf="price">
                   <td></td>
+                  <td></td>
                   <th>Total</th>
                   <th>${{price}}</th>
+                  <th></th>
                 </tr>
               </tbody>
             </table>

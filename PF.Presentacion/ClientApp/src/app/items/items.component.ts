@@ -52,10 +52,6 @@ export class ItemsComponent implements OnInit {
     }
 
     detailsItem(item: IItem) {
-        Swal.fire(
-            'Show item details',
-            'Este item ha sido eliminado',
-            'success'
-        )
+        
     }
 }

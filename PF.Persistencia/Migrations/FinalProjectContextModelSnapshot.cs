@@ -154,21 +154,19 @@ namespace PF.Persistencia.Migrations
 
             modelBuilder.Entity("PF.Dominio.Model.ItemMaterial", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
                     b.Property<int>("ItemId");
 
                     b.Property<int>("MaterialId");
 
+                    b.Property<int>("Id");
+
                     b.Property<DateTime>("ModificationDate");
+
+                    b.Property<int>("Quantity");
 
                     b.Property<int>("State");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("ItemId");
+                    b.HasKey("ItemId", "MaterialId");
 
                     b.HasIndex("MaterialId");
 

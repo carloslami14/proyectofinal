@@ -20,21 +20,21 @@ namespace PF.Persistencia.Repository
 
         public void Add(Item entity)
         {
-            entity.ModificationDate = DateTime.Today;
+            entity.ModificationDate = DateTime.Now;
             entity.State = State.Enabled;
             _context.Items.Add(entity);
         }
 
         public void Delete(Item entity)
         {
-            entity.ModificationDate = DateTime.Today;
+            entity.ModificationDate = DateTime.Now;
             entity.State = State.Removed;
             _context.Update(entity);
         }
 
         public void Edit(Item entity)
         {
-            entity.ModificationDate = DateTime.Today;
+            entity.ModificationDate = DateTime.Now;
             entity.State = State.Enabled;
             _context.Update(entity);
         }

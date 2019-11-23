@@ -5,6 +5,6 @@ export interface IItem {
     id: number;
     name: string;
     price: number;
-    itensMaterials: IItemMaterial[];
+    itemsMaterials: IItemMaterial[];
     materials: IMaterial[];
 }

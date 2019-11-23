@@ -11,7 +11,7 @@ namespace PF.Persistencia.FluentApi
     {
         public void Configure(EntityTypeBuilder<ItemMaterial> builder)
         {
-            builder.HasKey(im => im.Id);
+            builder.HasKey(im => new {  im.ItemId, im.MaterialId });
 
             builder.HasOne(im => im.Material)
                 .WithMany(m => m.Items)
