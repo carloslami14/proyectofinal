@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DatePipe } from '@angular/common'
 
 //Third party imports
 import { NgxLoadingModule } from "ngx-loading";
@@ -21,9 +22,11 @@ import { MaterialsComponent } from './materials/materials.component';
 import { MaterialsFormComponent } from './materials/materials-form/materials-form.component';
 import { ItemsComponent } from './items/items.component';
 import { ItemsFormComponent } from './items/items-form/items-form.component';
-import { ProjectsComponent } from './projects/projects.component';
-import { ProjectsFormComponent } from './projects/projects-form/projects-form.component';
 import { CalculationComponent } from './calculation/calculation.component';
+import { ConstructionComponent } from './construction/construction.component';
+import { ConstructionFormComponent } from './construction/construction-form/construction-form.component';
+import { ConstructionDetailFormComponent } from './construction/construction-form/construction-form.component';
+
 
 @NgModule({
     declarations: [
@@ -40,10 +43,11 @@ import { CalculationComponent } from './calculation/calculation.component';
         MaterialsFormComponent,
         ItemsComponent,
         ItemsFormComponent,
-        ProjectsComponent,
-        ProjectsFormComponent,
         ItemsFormComponent,
-        CalculationComponent
+        CalculationComponent,
+        ConstructionComponent,
+        ConstructionFormComponent,
+        ConstructionDetailFormComponent
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -64,15 +68,16 @@ import { CalculationComponent } from './calculation/calculation.component';
             { path: 'items', component: ItemsComponent },
             { path: 'items-add', component: ItemsFormComponent },
             { path: 'items-edit/:id', component: ItemsFormComponent },
-            { path: 'projects', component: ProjectsComponent },
-            { path: 'projects-add', component: ProjectsFormComponent },
-            { path: 'projects-edit/:id', component: ProjectsFormComponent },
             { path: 'calculation', component: CalculationComponent },
+            { path: 'construction', component: ConstructionComponent },
+            { path: 'construction-add', component: ConstructionFormComponent },
+            { path: 'construction-edit/:id', component: ConstructionFormComponent },
+            { path: 'construction-detail/:id', component: ConstructionDetailFormComponent },
         ]),
         BrowserAnimationsModule,
         NgxLoadingModule.forRoot({})
     ],
-    providers: [],
+    providers: [DatePipe],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

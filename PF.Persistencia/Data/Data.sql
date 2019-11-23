@@ -277,4 +277,15 @@ BEGIN
 			VALUES('TIERRAS Y ARCILLAS', GETDATE(), 1, (SELECT Id FROM Families WHERE [Name] = 'ARIDOS'));
 		END
 	END
+
+	--INSERT PROVIDERS
+	IF NOT EXISTS (SELECT * FROM Providers)
+		BEGIN
+			PRINT 'INSERT PROVIDERS'
+			INSERT INTO Providers([Name],[ModificationDate],[State], [CUIT], [Address])
+			VALUES('Proveedor 1', GETDATE(), 1, 123456, 'Calle falsa 1243');
+
+			INSERT INTO Providers([Name],[ModificationDate],[State], [CUIT], [Address])
+			VALUES('Proveedor 2', GETDATE(), 1, 456123, 'Calle falsa 1234');
+		END
 END

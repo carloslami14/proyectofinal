@@ -1,0 +1,5 @@
+#button_center {
+  position: absolute;
+  transition: .5s ease;
+  top: 30%;
+}

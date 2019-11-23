@@ -6,26 +6,24 @@
       </div>
     </div>
   </div>
+
   <div class="card-body">
     <div class="row">
-      <label class="col-md-2 control-label">Agregar Item</label>
       <div class="col-md-4">
-        <select class="form-control" [(ngModel)]="itemId">
-          <option value="0">--Items--</option>
-          <option *ngFor="let item of items" value={{item.id}}>{{item.name}} $ {{item.price}}</option>
-        </select>
+        <label class="col-md-6 control-label">Agregar Item</label>
+        <div class="col-md-12">
+          <select class="form-control" [(ngModel)]="itemId">
+            <option value="0">--Items--</option>
+            <option *ngFor="let item of items" value={{item.id}}>{{item.name}}</option>
+          </select>
+        </div>
       </div>
       <div class="col-md-4">
-        <input class="form-control"
-               [(ngModel)]="quantity"
-               id="quality"
-               type="text"
-               required />
+        <label>Cantidad</label>
+        <input class="form-control" [(ngModel)]="quantity" id="quality" type="text" required />
       </div>
       <div class="col-md-2">
-        <button class="btn btn-secondary btn-space"
-                type="button"
-                (click)="onSelectItem()">
+        <button class="btn btn-primary btn-space" [disabled]="!itemId" id="button_center" type="button" (click)="onSelectItem()">
           Agregar
         </button>
       </div>
@@ -36,31 +34,43 @@
         <thead>
           <tr>
             <th>Nombre</th>
+            <th>Costo Unitario</th>
             <th>Cantidad</th>
-            <th>Costo Parcial</th>
+            <th>Subtotal</th>
             <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let itemDetalle of itemsDetalle,let indice=index">
+          <tr *ngFor="let itemDetalle of itemsDetalle,let i=index">
             <td>{{itemDetalle.item.name}}</td>
+            <td>{{itemDetalle.item.price}}</td>
             <td>{{itemDetalle.quantity}}</td>
             <td>{{itemDetalle.item.price * itemDetalle.quantity}}</td>
             <td>
               <div class="btn-group">
-                <button class="btn btn-danger btn-space" (click)="quitarDeTabla(indice)">Quitar</button>
-                <button class="btn btn-primary btn-space">Modificiar</button>
+                <button class="btn btn-danger btn-space" (click)="deleteItem(i)">Quitar</button>
+                <button class="btn btn-primary btn-space">Modificar</button>
                 <button class="btn btn-primary btn-space">Ver</button>
               </div>
             </td>
           </tr>
+          <tr *ngIf="total">
+            <th></th>
+            <th></th>
+            <th>Total</th>
+            <th>${{total}}</th>
+            <th></th>
+          </tr>
         </tbody>
       </table>
     </div>
-    <div class="card-body row justify-content-end">
-      <label class="control-label col-md-3">Total</label>
-      <label class="control-label col-md-3">$ {{total}}</label>
-      <button class="btn btn-primary btn-space col-md-3" (click)="update()">Guardar</button>
+
+    <div class="form-group">
+      <div class="col-md-4 col-md-offset-2">
+        <span>
+          <button class="btn btn-primary btn-space" (click)="update()">Guardar</button>
+        </span>
+      </div>
     </div>
   </div>
 </div>

@@ -9,22 +9,6 @@ namespace PF.Persistencia.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Activities",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ModificationDate = table.Column<DateTime>(nullable: false),
-                    State = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    Cost = table.Column<double>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Activities", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Constructions",
                 columns: table => new
                 {
@@ -32,7 +16,7 @@ namespace PF.Persistencia.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ModificationDate = table.Column<DateTime>(nullable: false),
                     State = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(maxLength: 100, nullable: true),
                     Cost = table.Column<double>(nullable: false),
                     StartDate = table.Column<DateTime>(nullable: false),
                     EndDate = table.Column<DateTime>(nullable: false)
@@ -55,6 +39,22 @@ namespace PF.Persistencia.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Families", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Items",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ModificationDate = table.Column<DateTime>(nullable: false),
+                    State = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(maxLength: 100, nullable: true),
+                    Price = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Items", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -139,7 +139,7 @@ namespace PF.Persistencia.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Items",
+                name: "Activities",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -147,18 +147,18 @@ namespace PF.Persistencia.Migrations
                     ModificationDate = table.Column<DateTime>(nullable: false),
                     State = table.Column<int>(nullable: false),
                     Name = table.Column<string>(maxLength: 100, nullable: true),
-                    Price = table.Column<double>(nullable: false),
-                    ActivityId = table.Column<int>(nullable: true)
+                    Cost = table.Column<double>(nullable: false),
+                    ConstructionId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Items", x => x.Id);
+                    table.PrimaryKey("PK_Activities", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Items_Activities_ActivityId",
-                        column: x => x.ActivityId,
-                        principalTable: "Activities",
+                        name: "FK_Activities_Constructions_ConstructionId",
+                        column: x => x.ConstructionId,
+                        principalTable: "Constructions",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -214,6 +214,33 @@ namespace PF.Persistencia.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ItemActivity",
+                columns: table => new
+                {
+                    ItemId = table.Column<int>(nullable: false),
+                    ActivityId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false),
+                    ModificationDate = table.Column<DateTime>(nullable: false),
+                    State = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ItemActivity", x => new { x.ItemId, x.ActivityId });
+                    table.ForeignKey(
+                        name: "FK_ItemActivity_Activities_ActivityId",
+                        column: x => x.ActivityId,
+                        principalTable: "Activities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ItemActivity_Items_ItemId",
+                        column: x => x.ItemId,
+                        principalTable: "Items",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Materials",
                 columns: table => new
                 {
@@ -251,7 +278,8 @@ namespace PF.Persistencia.Migrations
                     MaterialId = table.Column<int>(nullable: false),
                     Id = table.Column<int>(nullable: false),
                     ModificationDate = table.Column<DateTime>(nullable: false),
-                    State = table.Column<int>(nullable: false)
+                    State = table.Column<int>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -271,9 +299,19 @@ namespace PF.Persistencia.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Activities_ConstructionId",
+                table: "Activities",
+                column: "ConstructionId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Categories_FamilyId",
                 table: "Categories",
                 column: "FamilyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ItemActivity_ActivityId",
+                table: "ItemActivity",
+                column: "ActivityId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ItemDetalle_ConstructionId",
@@ -284,11 +322,6 @@ namespace PF.Persistencia.Migrations
                 name: "IX_ItemDetalle_ItemId",
                 table: "ItemDetalle",
                 column: "ItemId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Items_ActivityId",
-                table: "Items",
-                column: "ActivityId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ItemsMaterials_MaterialId",
@@ -309,6 +342,9 @@ namespace PF.Persistencia.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "ItemActivity");
+
+            migrationBuilder.DropTable(
                 name: "ItemDetalle");
 
             migrationBuilder.DropTable(
@@ -327,7 +363,7 @@ namespace PF.Persistencia.Migrations
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Constructions");
+                name: "Activities");
 
             migrationBuilder.DropTable(
                 name: "Items");
@@ -336,7 +372,7 @@ namespace PF.Persistencia.Migrations
                 name: "Materials");
 
             migrationBuilder.DropTable(
-                name: "Activities");
+                name: "Constructions");
 
             migrationBuilder.DropTable(
                 name: "Categories");

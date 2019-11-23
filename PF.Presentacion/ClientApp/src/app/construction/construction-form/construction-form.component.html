@@ -1,0 +1,61 @@
+<div class="card">
+  <div class="card-header">
+    <h3>{{EditionMode ? 'Editar' : 'Agregar'}} Construccion</h3>
+  </div>
+
+  <div class="card-body">
+    <form class="form-horizontal" novalidate (ngSubmit)="save()" [formGroup]="formGroup">
+      <fieldset>
+        <div class="form-group">
+          <label class="col-md-2 control-label">Nombre</label>
+          <div class="col-md-12">
+            <input class="form-control" id="name" type="text" required formControlName="name" />
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-sm-4">
+            <label class="col-md-12 control-label">Fecha Inicio</label>
+            <div class="col-md-12">
+              <input class="form-control" id="startDate" required type="date" formControlName="startDate" />
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <label class="col-md-12 control-label">Fecha Fin</label>
+            <div class="col-md-12">
+              <input class="form-control" id="endDate" required type="date" formControlName="endDate" />
+            </div>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-md-12">
+            <label class="col-md-4 control-label">Domicilio</label>
+            <div class="col-md-12">
+              <input class="form-control" id="address" type="text" required formControlName="address" />
+            </div>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-md-12">
+            <label class="col-md-4 control-label">Descripcion</label>
+            <div class="col-md-12">
+              <textarea class="form-control" id="description" required formControlName="description"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <br />
+        <div class="form-group">
+          <div class="col-md-4 col-md-offset-2">
+            <span>
+              <button class="btn btn-primary btn-space" type="submit" [disabled]="!formGroup.valid">Guardar</button>
+              <button class="btn btn-secondary btn-space" type="button" [routerLink]='["/construction"]'>Cancelar</button>
+            </span>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>

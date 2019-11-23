@@ -23,6 +23,10 @@
     <Compile Remove="Migrations\20191105022832_NombrePorName.Designer.cs" />
     <Compile Remove="Migrations\20191122223938_IdItemMaterial.cs" />
     <Compile Remove="Migrations\20191122223938_IdItemMaterial.Designer.cs" />
+    <Compile Remove="Migrations\20191122224402_Model.cs" />
+    <Compile Remove="Migrations\20191122224402_Model.Designer.cs" />
+    <Compile Remove="Migrations\20191122225438_AddQuantityPropertyInItemMaterialTable.cs" />
+    <Compile Remove="Migrations\20191122225438_AddQuantityPropertyInItemMaterialTable.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

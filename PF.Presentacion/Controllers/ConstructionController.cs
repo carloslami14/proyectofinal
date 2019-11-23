@@ -20,13 +20,13 @@ namespace PF.Presentacion.Controllers
         {
             _constructionRepository = contructionRepository;
         }
+
         // GET: api/Construction
         [HttpGet]
         public ActionResult<IEnumerable<Construction>> GetConstructions()
         {
             return _constructionRepository.GetAll().ToList();
         }
-
 
         // GET: api/Construction/5
         [HttpGet("{id}")]
@@ -41,16 +41,22 @@ namespace PF.Presentacion.Controllers
 
             return construction;
         }
-        // Agregar contruction
+
         // POST: api/Construction
         [HttpPost]
         public ActionResult<Construction> PostConstruction(Construction construction)
         {
-            _constructionRepository.Add(construction);
-            _constructionRepository.Save();
+            try
+            {
+                _constructionRepository.Add(construction);
+                _constructionRepository.Save();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
 
             return CreatedAtAction("GetConstruction", new { id = construction.Id }, construction);
         }
-
     }
 }

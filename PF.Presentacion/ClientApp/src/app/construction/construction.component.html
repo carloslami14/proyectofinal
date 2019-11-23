@@ -1,0 +1,43 @@
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-md-6">
+        <h3 class="card-title">Construcciones</h3>
+      </div>
+      <div class="col-md-6">
+        <a [routerLink]="['/construction-add']" routerLinkActive="router-link-active" class="btn btn-primary float-right">Agregar</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <table class='table table-striped' *ngIf="constructions">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Nombre</th>
+          <th>Fecha Inicio</th>
+          <th>Fecha Fin</th>
+          <th>Costo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let construction of constructions">
+          <td>{{ construction.id }}</td>
+          <td>{{ construction.name }}</td>
+          <td>{{ construction.startDate | date:'medium' }}</td>
+          <td>{{ construction.endDate | date:'medium' }}</td>
+          <td>{{ construction.cost }}</td>
+          <td>
+            <div class="btn-group">
+              <button class="btn btn-info btn-space" [routerLink]="['/construction-detail/' + construction.id]">Ver</button>
+              <button class="btn btn-primary btn-space" [routerLink]="['/construction-edit/' + construction.id]">Modificar</button>
+              <button class="btn btn-danger btn-space" (click)="deleteConstruction(construction)">Eliminar</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

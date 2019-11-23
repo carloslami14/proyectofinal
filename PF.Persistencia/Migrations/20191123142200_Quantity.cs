@@ -2,13 +2,13 @@
 
 namespace PF.Persistencia.Migrations
 {
-    public partial class AddQuantityPropertyInItemMaterialTable : Migration
+    public partial class Quantity : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<int>(
                 name: "Quantity",
-                table: "ItemsMaterials",
+                table: "ItemActivity",
                 nullable: false,
                 defaultValue: 0);
         }
@@ -17,7 +17,7 @@ namespace PF.Persistencia.Migrations
         {
             migrationBuilder.DropColumn(
                 name: "Quantity",
-                table: "ItemsMaterials");
+                table: "ItemActivity");
         }
     }
 }

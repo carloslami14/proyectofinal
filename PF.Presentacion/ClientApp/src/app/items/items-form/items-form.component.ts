@@ -20,7 +20,7 @@ export class ItemsFormComponent implements OnInit {
     itemId: number;
     materials: IItemMaterial[] = [];
     materialsComboBox: IMaterial[] = [];
-    materialId: number;
+    materialId: number = 0;
     price: number = 0;
     quantity: number = 1;
 
@@ -38,6 +38,7 @@ export class ItemsFormComponent implements OnInit {
         this.formGroup = this.fb.group({
             name: '',
             price: '0',
+            materialId: '0',
             quantity: '1'
         });
 
@@ -59,7 +60,8 @@ export class ItemsFormComponent implements OnInit {
     loadForm(item: IItem) {
         this.formGroup.patchValue({
             name: item.name,
-            quantity: '1'
+            quantity: '1',
+            materialId: '0'
         });
         this.price = item.price;
         this.materials = item.itemsMaterials;
@@ -76,7 +78,6 @@ export class ItemsFormComponent implements OnInit {
 
     addMaterial() {
         if (this.materialId > 0) {
-            console.log(this.quantity);
             let m = this.materialsComboBox.find(m => m.id == this.materialId);
             let itemMaterial: IItemMaterial = {
                 materialId: m.id,

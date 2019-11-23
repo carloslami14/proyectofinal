@@ -10,8 +10,8 @@ using PF.Persistencia.Context;
 namespace PF.Persistencia.Migrations
 {
     [DbContext(typeof(FinalProjectContext))]
-    [Migration("20191122225438_AddQuantityPropertyInItemMaterialTable")]
-    partial class AddQuantityPropertyInItemMaterialTable
+    [Migration("20191123160936_ChangeTableConstrucction")]
+    partial class ChangeTableConstrucction
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,15 +27,20 @@ namespace PF.Persistencia.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("ConstructionId");
+
                     b.Property<double>("Cost");
 
                     b.Property<DateTime>("ModificationDate");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasMaxLength(100);
 
                     b.Property<int>("State");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ConstructionId");
 
                     b.ToTable("Activities");
                 });
@@ -68,13 +73,19 @@ namespace PF.Persistencia.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Address")
+                        .HasMaxLength(100);
+
                     b.Property<double>("Cost");
+
+                    b.Property<string>("Description");
 
                     b.Property<DateTime>("EndDate");
 
                     b.Property<DateTime>("ModificationDate");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasMaxLength(50);
 
                     b.Property<DateTime>("StartDate");
 
@@ -109,8 +120,6 @@ namespace PF.Persistencia.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ActivityId");
-
                     b.Property<DateTime>("ModificationDate");
 
                     b.Property<string>("Name")
@@ -122,9 +131,28 @@ namespace PF.Persistencia.Migrations
 
                     b.HasKey("Id");
 
+                    b.ToTable("Items");
+                });
+
+            modelBuilder.Entity("PF.Dominio.Model.ItemActivity", b =>
+                {
+                    b.Property<int>("ItemId");
+
+                    b.Property<int>("ActivityId");
+
+                    b.Property<int>("Id");
+
+                    b.Property<DateTime>("ModificationDate");
+
+                    b.Property<int>("Quantity");
+
+                    b.Property<int>("State");
+
+                    b.HasKey("ItemId", "ActivityId");
+
                     b.HasIndex("ActivityId");
 
-                    b.ToTable("Items");
+                    b.ToTable("ItemActivity");
                 });
 
             modelBuilder.Entity("PF.Dominio.Model.ItemDetalle", b =>
@@ -190,6 +218,8 @@ namespace PF.Persistencia.Migrations
 
                     b.Property<double>("Price");
 
+                    b.Property<int>("ProviderId");
+
                     b.Property<int>("State");
 
                     b.Property<int>("UnitId");
@@ -197,6 +227,8 @@ namespace PF.Persistencia.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("ProviderId");
 
                     b.HasIndex("UnitId");
 
@@ -302,6 +334,14 @@ namespace PF.Persistencia.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("PF.Dominio.Model.Activity", b =>
+                {
+                    b.HasOne("PF.Dominio.Model.Construction", "Construction")
+                        .WithMany("Activities")
+                        .HasForeignKey("ConstructionId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("PF.Dominio.Model.Category", b =>
                 {
                     b.HasOne("PF.Dominio.Model.Family", "Family")
@@ -310,11 +350,17 @@ namespace PF.Persistencia.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("PF.Dominio.Model.Item", b =>
+            modelBuilder.Entity("PF.Dominio.Model.ItemActivity", b =>
                 {
-                    b.HasOne("PF.Dominio.Model.Activity")
+                    b.HasOne("PF.Dominio.Model.Activity", "Activity")
                         .WithMany("Items")
-                        .HasForeignKey("ActivityId");
+                        .HasForeignKey("ActivityId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("PF.Dominio.Model.Item", "Item")
+                        .WithMany("Activities")
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("PF.Dominio.Model.ItemDetalle", b =>
@@ -347,6 +393,11 @@ namespace PF.Persistencia.Migrations
                     b.HasOne("PF.Dominio.Model.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("PF.Dominio.Model.Provider", "Provider")
+                        .WithMany()
+                        .HasForeignKey("ProviderId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("PF.Dominio.Model.Unit", "Unit")

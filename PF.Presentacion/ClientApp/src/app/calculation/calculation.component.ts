@@ -15,9 +15,8 @@ export class CalculationComponent implements OnInit {
   items: IItem[] = [];
   itemsDetalle: IItemDetalle[] = [];
   itemId: number=0;
-  quantity: number = 0;
+  quantity: number = 1;
   total: number = 0;
-  // Esto a cambiar si es que en algun momento se puede editar
   constructionId: number= 0;
 
   constructor(private itemsService: ItemsService,
@@ -41,8 +40,9 @@ export class CalculationComponent implements OnInit {
     };
     this.itemsDetalle.push(itemDetalle);
     this.calcular();
-  }
-  quitarDeTabla(index: number) {
+    }
+
+  deleteItem(index: number) {
     this.itemsDetalle.splice(index, 1);
     this.calcular();
   }
@@ -53,14 +53,12 @@ export class CalculationComponent implements OnInit {
 
   update() {
     let construction: IConstruction;
-    console.log("que hago aca");
     //Elimino los items para que no tener problemas al hacer el add de construction
     var array = this.itemsDetalle;
     array.forEach(function (element) {
       element.item = undefined;
     });
    
-    console.log(this.itemsDetalle);
     construction = {
       id: this.constructionId,
       name: "prueba",
@@ -70,12 +68,8 @@ export class CalculationComponent implements OnInit {
       itemsDetalle:array,
     };
 
-
-    console.log(construction);
     this.constructionService.createConstruction(construction)
       .subscribe(() => console.log("Guardado"),
         error => console.error(error));
-
   }
-
 }

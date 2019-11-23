@@ -21,6 +21,7 @@ namespace PF.Persistencia.Repository
 
         public void Add(Construction entity)
         {
+            entity.CreatedDate = DateTime.Now;
             entity.ModificationDate = DateTime.Now;
             entity.State = State.Enabled;
             _context.Constructions.Add(entity);
@@ -28,22 +29,26 @@ namespace PF.Persistencia.Repository
 
         public void Delete(Construction entity)
         {
-            throw new NotImplementedException();
+            entity.ModificationDate = DateTime.Now;
+            entity.State = State.Removed;
+            _context.Update(entity);
         }
 
         public void Edit(Construction entity)
         {
-            throw new NotImplementedException();
+            entity.ModificationDate = DateTime.Now;
+            entity.State = State.Enabled;
+            _context.Update(entity);
         }
 
         public IEnumerable<Construction> GetAll()
         {
-            return _context.Constructions.Where(construction => construction.State == State.Enabled);
+            return _context.Constructions.Where(c => c.State == State.Enabled);
         }
 
         public Construction GetById(int Id)
         {
-            return _context.Constructions.FirstOrDefault(fl => fl.Id == Id && fl.State == State.Enabled);
+            return _context.Constructions.FirstOrDefault(c => c.Id == Id && c.State == State.Enabled);
         }
 
         public void Save()

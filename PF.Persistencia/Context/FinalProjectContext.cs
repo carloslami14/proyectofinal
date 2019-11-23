@@ -36,6 +36,9 @@ namespace PF.Persistencia.Context
             modelBuilder.ApplyConfiguration(new MaterialConfiguration());
             modelBuilder.ApplyConfiguration(new ItemConfiguration());
             modelBuilder.ApplyConfiguration(new ItemMaterialConfiguration());
+            modelBuilder.ApplyConfiguration(new ActivityConfiguration());
+            modelBuilder.ApplyConfiguration(new ConstructionConfiguration());
+            modelBuilder.ApplyConfiguration(new ItemActivityConfiguration());
             //modelBuilder.ApplyConfiguration(new ItemItemConfiguration());
             #endregion
         }

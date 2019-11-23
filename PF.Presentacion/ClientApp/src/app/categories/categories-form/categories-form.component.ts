@@ -75,7 +75,6 @@ export class CategoriesFormComponent implements OnInit {
                     error => console.error(error));
         } else {
             // Create Category
-            console.log(category);
             this.categoriesServices.createCategory(category)
                 .subscribe(() => this.onSaveSuccess(),
                     error => console.error(error));

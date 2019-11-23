@@ -15,6 +15,7 @@ namespace PF.Persistencia.FluentApi
             builder.Property(m => m.Name).HasMaxLength(100);
             builder.HasOne(m => m.Unit);
             builder.HasOne(m => m.Category);
+            builder.HasOne(m => m.Provider);
         }
     }
 }

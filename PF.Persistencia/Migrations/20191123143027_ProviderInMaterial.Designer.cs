@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PF.Persistencia.Context;
 
 namespace PF.Persistencia.Migrations
 {
     [DbContext(typeof(FinalProjectContext))]
-    partial class FinalProjectContextModelSnapshot : ModelSnapshot
+    [Migration("20191123143027_ProviderInMaterial")]
+    partial class ProviderInMaterial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -71,21 +73,14 @@ namespace PF.Persistencia.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address")
-                        .HasMaxLength(100);
-
                     b.Property<double>("Cost");
-
-                    b.Property<DateTime>("CreatedDate");
-
-                    b.Property<string>("Description");
 
                     b.Property<DateTime>("EndDate");
 
                     b.Property<DateTime>("ModificationDate");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(50);
+                        .HasMaxLength(100);
 
                     b.Property<DateTime>("StartDate");
 

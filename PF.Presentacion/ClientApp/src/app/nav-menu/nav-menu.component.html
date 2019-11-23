@@ -1,7 +1,7 @@
 <header>
   <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
     <div class="container">
-      <a class="navbar-brand" [routerLink]="['/']">Gestor de Proyectos</a>
+      <a class="navbar-brand" [routerLink]="['/']">Plataforma</a>
       <button class="navbar-toggler"
               type="button"
               data-toggle="collapse"
@@ -15,7 +15,13 @@
            [ngClass]="{ show: isExpanded }">
         <ul class="navbar-nav flex-grow">
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/calculation']">Computo Metrico</a>
+            <a class="nav-link text-dark" [routerLink]="['/construction']">Construcciones</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/items']">Items</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/materials']">Materiales</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" [routerLink]="['/families']">Familia</a>
@@ -23,49 +29,8 @@
           <li class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" [routerLink]="['/categories']">Categoria</a>
           </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/materials']">Materiales</a>
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/items']">Items</a>
-          </li>
         </ul>
       </div>
     </div>
   </nav>
 </header>
-
-<!--
-<div>
-  <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
-    <a class="navbar-brand" [routerLink]='["/"]'>Sistema Gestor de Obras</a>
-
-    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-label="Toggle navigation"
-      [attr.aria-expanded]="isExpanded" (click)="toggle()">
-      <span class="navbar-toggler-icon"></span>
-    </button> 
-
-<div class="collapse navbar-collapse xnavbar-nav xnav">
-  <ul class="navbar-nav mr-auto">
-    <li class="nav-item">
-      <a class="nav-link nav-link" [routerLink]="['/']" routerLinkActive="['link-active']">Home</a>
-    </li>
-
-    <li class="nav-item">
-      <a class="nav-link nav-link" [routerLink]="['/families']" routerLinkActive="['link-active']">Familias</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link nav-link" [routerLink]="['/categories']" routerLinkActive="['link-active']">Categorias</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link nav-link" [routerLink]="['/materials']" routerLinkActive="['link-active']">Materiales</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link nav-link" [routerLink]="['/items']" routerLinkActive="['link-active']">Items</a>
-    </li>
-  </ul>
-</div>
-  </div>
-</div>
-
--->
