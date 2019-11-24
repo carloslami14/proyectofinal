@@ -37,6 +37,7 @@ namespace PF.Presentacion.Controllers
         public ActionResult<Construction> GetConstruction(int id)
         {
             var construction = _constructionRepository.GetById(id);
+            construction.Items = construction.Items.Where(i => i.State == Dominio.State.Enabled).ToList();
 
             if (construction == null)
             {
@@ -115,17 +116,19 @@ namespace PF.Presentacion.Controllers
                         }
                     }
 
+                    _itemConstructionRepository.Save();
+
                     foreach (var ic in itemsConstructions)
                     {
                         //Delete items erased
-                        var icDelete = itemsConstructionsByItemId.Where(icc => icc.Key != ic.ItemId).FirstOrDefault();
-                        if (icDelete != null)
+                        var icDelete = itemsConstructionsByItemId.Any(icc => icc.Key == ic.ItemId);
+                        if (!icDelete)
                         {
                             var itemConstruction = new ItemConstruction()
                             {
-                                ItemId = icDelete.Key,
                                 ConstructionId = id,
-                                Quantity = icDelete.Sum(i => i.Quantity)
+                                ItemId = ic.ItemId,
+                                Quantity = ic.Quantity
                             };
                             _itemConstructionRepository.Delete(itemConstruction);
                         }

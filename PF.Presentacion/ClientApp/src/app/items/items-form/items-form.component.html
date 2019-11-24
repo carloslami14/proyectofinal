@@ -4,8 +4,7 @@
   </div>
 
   <div class="card-body">
-    <form class="form-horizontal" novalidate
-          (ngSubmit)="save()" [formGroup]="formGroup">
+    <form class="form-horizontal" novalidate (ngSubmit)="save()" [formGroup]="formGroup">
       <fieldset>
         <div class="form-group">
           <label class="col-md-2 control-label">Nombre</label>
@@ -81,16 +80,8 @@
         <div class="form-group">
           <div class="col-md-4 col-md-offset-2">
             <span>
-              <button class="btn btn-primary  btn-space"
-                      type="submit"
-                      [disabled]="!formGroup.valid">
-                Guardar
-              </button>
-              <button class="btn btn-secondary btn-space"
-                      type="button"
-                      [routerLink]='["/items"]'>
-                Cancelar
-              </button>
+              <button class="btn btn-secondary btn-space" type="button" [routerLink]='["/items"]'>Cancelar</button>
+              <button class="btn btn-primary  btn-space" type="submit" [disabled]="!formGroup.valid">Guardar</button>
             </span>
           </div>
         </div>

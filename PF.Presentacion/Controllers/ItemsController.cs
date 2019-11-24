@@ -66,7 +66,7 @@ namespace PF.Presentacion.Controllers
                 #endregion
 
                 #region Edit Item Material
-                var itemsMaterials = _itemMaterialRepository.GetItemMaterialsByItemId(id);
+                var itemsMaterials = _itemMaterialRepository.GetItemMaterialsByItemId(id).ToList();
                 var itemsMaterialsByMaterialId = model.ItemsMaterials.GroupBy(im => im.MaterialId).ToList();
                 
                 if (itemsMaterialsByMaterialId.Count() == 0)
@@ -82,7 +82,7 @@ namespace PF.Presentacion.Controllers
                     foreach (var im in itemsMaterialsByMaterialId)
                     {
                         var imAux = itemsMaterials.Where(ims => ims.MaterialId == im.Key).FirstOrDefault();
-                        if (item != null)
+                        if (imAux != null)
                         {
                             //Edit item material
                             var itemMaterial = new ItemMaterial()
@@ -105,24 +105,26 @@ namespace PF.Presentacion.Controllers
                             _itemMaterialRepository.Add(itemMaterial);
                         }
                     }
+                    
+                    _itemMaterialRepository.Save();
 
                     foreach (var im in itemsMaterials)
                     {
                         //Delete items erased
-                        var imDelete = itemsMaterialsByMaterialId.Where(imm => imm.Key != im.MaterialId).FirstOrDefault();
-                        if (imDelete != null)
+                        var imDelete = itemsMaterialsByMaterialId.Any(imm => imm.Key == im.MaterialId);
+                        if (!imDelete)
                         {
                             var itemMaterial = new ItemMaterial()
                             {
                                 ItemId = item.Id,
-                                MaterialId = imDelete.Key,
-                                Quantity = imDelete.Sum(i => i.Quantity)
+                                MaterialId = im.MaterialId,
+                                Quantity = im.Quantity
                             };
                             _itemMaterialRepository.Delete(itemMaterial);
                         }
                     }
                 }
-
+                
                 _itemMaterialRepository.Save();
                 #endregion
             }

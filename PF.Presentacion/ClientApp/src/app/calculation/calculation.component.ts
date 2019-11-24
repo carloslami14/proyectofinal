@@ -40,9 +40,14 @@ export class CalculationComponent implements OnInit {
             //Create calculation of construction
             this.constructionId = params["id"];
             this.constructionServices.getConstructionById(this.constructionId.toString())
-                .subscribe(construction => this.construction = construction,
+                .subscribe(construction => this.loadForm(construction),
                     error => console.error(error));
         });
+    }
+
+    loadForm(construction: IConstruction) {
+        this.construction = construction;
+        this.total = construction.cost;
     }
 
     onSelectItem() {
