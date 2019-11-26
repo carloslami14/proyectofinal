@@ -34,6 +34,7 @@ namespace PF.Persistencia.Repository
 
         public void Edit(Material entity)
         {
+            entity.ProviderId = 1;
             entity.ModificationDate = DateTime.Now;
             entity.State = State.Enabled;
             _context.Update(entity);
